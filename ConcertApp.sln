@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertApp.Data", "ConcertApp.Data\ConcertApp.Data.csproj", "{A661B86D-623E-44D4-8425-A6B183472729}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConcertApp.Data", "ConcertApp.Data\ConcertApp.Data.csproj", "{A661B86D-623E-44D4-8425-A6B183472729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertApp.Data.DTO", "ConcertApp.Data.DTO\ConcertApp.Data.DTO.csproj", "{D89F975C-1068-4416-86F5-24C824EAD937}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertApp.API", "ConcertApp.API\ConcertApp.API.csproj", "{E14D2AD4-0BED-495C-BFA3-221FFD4D2ED7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertApp.MAUI", "ConcertApp.MAUI\ConcertApp.MAUI.csproj", "{7B7643CF-71AB-4893-8CE9-19A4AF7CC358}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,20 @@ Global
 		{A661B86D-623E-44D4-8425-A6B183472729}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A661B86D-623E-44D4-8425-A6B183472729}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A661B86D-623E-44D4-8425-A6B183472729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D89F975C-1068-4416-86F5-24C824EAD937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89F975C-1068-4416-86F5-24C824EAD937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89F975C-1068-4416-86F5-24C824EAD937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89F975C-1068-4416-86F5-24C824EAD937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E14D2AD4-0BED-495C-BFA3-221FFD4D2ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14D2AD4-0BED-495C-BFA3-221FFD4D2ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14D2AD4-0BED-495C-BFA3-221FFD4D2ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14D2AD4-0BED-495C-BFA3-221FFD4D2ED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B7643CF-71AB-4893-8CE9-19A4AF7CC358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B7643CF-71AB-4893-8CE9-19A4AF7CC358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B7643CF-71AB-4893-8CE9-19A4AF7CC358}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7B7643CF-71AB-4893-8CE9-19A4AF7CC358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B7643CF-71AB-4893-8CE9-19A4AF7CC358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B7643CF-71AB-4893-8CE9-19A4AF7CC358}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
