@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConcertApp.Data.Entity
 {
-    internal class User
+    public class User
     {
-        string id;
+        public required string ID { get; set; }
         string name;
         string email;
         string password;

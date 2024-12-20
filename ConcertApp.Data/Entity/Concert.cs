@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConcertApp.Data.Entity
 {
-    internal class Concert
+    public class Concert
     {
     }
 }
