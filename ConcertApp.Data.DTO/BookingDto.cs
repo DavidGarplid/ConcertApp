@@ -9,7 +9,7 @@ namespace ConcertApp.Data.DTO
     public class BookingDto
     {
         public string ID { get; set; } = null!;
-        //performance id
+        //performance ids (list?)
         //user name 
         //user email
     }
