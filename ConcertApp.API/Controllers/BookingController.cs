@@ -79,4 +79,36 @@ public class BookingController : ControllerBase
         //return NoContent();
         return Ok(_mapper.Map<BookingDto>(item));
     }
+
+    [HttpPut]
+    public async Task<IActionResult> Edit([FromBody] BookingDto dto)
+    {
+        Booking item;
+        try
+        {
+            item = _mapper.Map<Booking>(dto);
+            if (item == null || !ModelState.IsValid)
+            {
+                return BadRequest(ErrorCode.BookingRequired.ToString());
+            }
+            var existingItem = await _unitOfWork.Bookings.Find(item.ID);
+            if (existingItem == null)
+            {
+                return NotFound(ErrorCode.RecordNotFound.ToString());
+            }
+            item.Performances = existingItem.Performances;
+            //_todoRepository.Update(item);
+            //_unitOfWork.TodoItems.Update(item);
+            _unitOfWork.TodoItems.Delete(existingItem);
+            _unitOfWork.TodoItems.Insert(item);
+            int affectedItems = await _unitOfWork.Complete();
+        }
+        catch (Exception)
+        {
+            return BadRequest(ErrorCode.CouldNotUpdateItem.ToString());
+        }
+        30
+//return NoContent();
+return Ok(_mapper.Map<BookingDto>(item));
+    }
 }
