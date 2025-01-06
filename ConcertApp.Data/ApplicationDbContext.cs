@@ -1,7 +1,7 @@
 ﻿using ConcertApp.Data.Entity;
 using Microsoft.EntityFrameworkCore;
-using Todo.Data.Entity;
-namespace Todo.Data;
+using ConcertApp.Data.Entity;
+namespace ConcertApp.Data;
 public class ApplicationDbContext : DbContext
 {
     public virtual DbSet<User> Users { get; set; }
