@@ -8,10 +8,10 @@ namespace ConcertApp.Data.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
-        IBookingRepository Booking { get; }
-        IConcertRepository Concert { get; }
-        IPerformanceRepository Performance { get; }
-        IUserRepository User { get; }
+        IBookingRepository Bookings { get; }
+        IConcertRepository Concerts { get; }
+        IPerformanceRepository Performances { get; }
+        IUserRepository Users { get; }
         Task<int> Complete();
     }
 }
