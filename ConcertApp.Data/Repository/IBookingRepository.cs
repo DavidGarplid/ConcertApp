@@ -10,9 +10,9 @@ namespace ConcertApp.Data.Repository
 {
     public interface IBookingRepository : IRepository<Booking>
     {
-        public Task<Booking> Find(string id);
+        public Task<Booking> Find(int id);
         public Task UpdateAsync(Booking booking);
-        public void Delete(Booking entity);
+        public void Delete(int id);
         public Task CreateAsync(Booking booking);
     }
 }

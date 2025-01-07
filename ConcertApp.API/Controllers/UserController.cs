@@ -40,11 +40,11 @@ public class UserController : ControllerBase
             {
                 return BadRequest(ErrorCode.InvalidUser.ToString());
             }
-            bool itemExists = await _unitOfWork.Users.Find(item.ID);
-            if (itemExists)
+        
+            var existingUser = await _unitOfWork.Users.Find(item.ID);
+            if (existingUser != null)
             {
-                return StatusCode(StatusCodes.Status409Conflict,
-                ErrorCode.UserExists.ToString());
+                return StatusCode(StatusCodes.Status409Conflict, ErrorCode.UserExists.ToString());
             }
             _unitOfWork.Users.Insert(item);
             int affectedItems = await _unitOfWork.Complete();

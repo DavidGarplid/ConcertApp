@@ -46,11 +46,11 @@ public class BookingController : ControllerBase
             {
                 return BadRequest(ErrorCode2.InvalidBooking.ToString());
             }
-            bool itemExists = await _unitOfWork.Bookings.Find(item.ID);
-            if (itemExists)
+      
+            var existingUser = await _unitOfWork.Bookings.Find(item.ID);
+            if (existingUser != null)
             {
-                return StatusCode(StatusCodes.Status409Conflict,
-                ErrorCode2.BookingExists.ToString());
+                return StatusCode(StatusCodes.Status409Conflict, ErrorCode2.BookingExists.ToString());
             }
             _unitOfWork.Bookings.Insert(item);
             int affectedItems = await _unitOfWork.Complete();
@@ -63,7 +63,7 @@ public class BookingController : ControllerBase
     }
     
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         Booking? item;
         try
@@ -102,7 +102,7 @@ public class BookingController : ControllerBase
             {
                 return NotFound(ErrorCode2.RecordNotFound.ToString());
             }
-            item.Performances = existingItem.Performances;
+            item.Performance = existingItem.Performance;
             //_todoRepository.Update(item);
             //_unitOfWork.TodoItems.Update(item);
             _unitOfWork.Bookings.Delete(existingItem);

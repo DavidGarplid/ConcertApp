@@ -31,11 +31,11 @@ namespace ConcertApp.Data.Repository
             await Context.SaveChangesAsync();
         }
 
-        public async Task<Booking> Find(string id)
+        public async Task<Booking> Find(int id)
         {
             return await DbContext.Bookings.FindAsync(id);
         }
-        public void Delete(string id)
+        public void Delete(int id)
         {
             var entity = Context.Set<Booking>().Find(id);
             if (entity == null)
