@@ -62,10 +62,12 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(b => b.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
-            entity.HasOne(b => b.Performance)
-            .WithMany(p => p.Bookings)
-            .HasForeignKey(p => p.Id)
-            .OnDelete(DeleteBehavior.Restrict);
+            //entity.HasOne(b => b.Performance)
+            //.WithMany(p => p.Bookings)
+            //.HasForeignKey(p => p.Id)
+            //.OnDelete(DeleteBehavior.Restrict);
+
+            SeedData(modelBuilder);
         });
     }
     private void SeedData(ModelBuilder builder)
