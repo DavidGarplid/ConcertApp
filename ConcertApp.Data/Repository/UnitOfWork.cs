@@ -10,15 +10,15 @@ namespace ConcertApp.Data.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext context;
-        public IBookingRepository Booking { get; private set; }
-        public IConcertRepository Concert { get; private set; }
-        public IPerformanceRepository Performance { get; private set; }
-        public IUserRepository User { get; private set; }
+        public IBookingRepository Bookings { get; private set; }
+        public IConcertRepository Concerts { get; private set; }
+        public IPerformanceRepository Performances { get; private set; }
+        public IUserRepository Users { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             this.context = context;
-            Booking = new BookingRepository(context);
+            Bookings = new BookingRepository(context);
         }
         public async Task<int> Complete()
         {

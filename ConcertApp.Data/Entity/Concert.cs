@@ -8,7 +8,7 @@ namespace ConcertApp.Data.Entity
 {
     public class Concert
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public ICollection<Performance> Performances { get; set; }

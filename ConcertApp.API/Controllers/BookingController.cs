@@ -69,6 +69,7 @@ public class BookingController : ControllerBase
                 return NotFound(ErrorCode.BookingNotFound.ToString());
             }
             //_todoRepository.Delete(id);
+            
             _unitOfWork.Bookings.Delete(id);
             int affectedItems = await _unitOfWork.Complete();
         }
@@ -99,8 +100,8 @@ public class BookingController : ControllerBase
             item.Performances = existingItem.Performances;
             //_todoRepository.Update(item);
             //_unitOfWork.TodoItems.Update(item);
-            _unitOfWork.TodoItems.Delete(existingItem);
-            _unitOfWork.TodoItems.Insert(item);
+            _unitOfWork.Bookings.Delete(existingItem);
+            _unitOfWork.Bookings.Insert(item);
             int affectedItems = await _unitOfWork.Complete();
         }
         catch (Exception)
