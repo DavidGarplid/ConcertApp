@@ -18,7 +18,7 @@ namespace ConcertApp.Data.Repository
         public UnitOfWork(ApplicationDbContext context)
         {
             this.context = context;
-            Booking = new BookingRepository(context);
+            Bookings = new BookingRepository(context);
         }
         public async Task<int> Complete()
         {
