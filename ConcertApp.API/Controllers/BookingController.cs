@@ -41,7 +41,7 @@ public class BookingController : ControllerBase
             {
                 return BadRequest(ErrorCode.InvalidBooking.ToString());
             }
-            bool itemExists = await _unitOfWork.Bookings.DoesItemExist(item.ID);
+            bool itemExists = await _unitOfWork.Bookings.Find(item.ID);
             if (itemExists)
             {
                 return StatusCode(StatusCodes.Status409Conflict,

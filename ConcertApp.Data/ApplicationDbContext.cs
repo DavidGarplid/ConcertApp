@@ -94,14 +94,14 @@ public class ApplicationDbContext : DbContext
         // Seed Concerts
         var concert1 = new Concert
         {
-            Id = 1,
+            ID = 1,
             Name = "Rock Concert",
             Description = "A night of amazing rock music."
         };
 
         var concert2 = new Concert
         {
-            Id = 2,
+            ID = 2,
             Name = "Jazz Night",
             Description = "Smooth jazz performances all evening."
         };
@@ -115,7 +115,7 @@ public class ApplicationDbContext : DbContext
             Name = "Opening Act",
             Location = "Main Stage",
             DateTime = DateTime.UtcNow.AddHours(1),
-            ConcertId = concert1.Id // Links to Rock Concert
+            ConcertId = concert1.ID // Links to Rock Concert
         };
 
         var performance2 = new Performance
@@ -124,7 +124,7 @@ public class ApplicationDbContext : DbContext
             Name = "Metallica",
             Location = "Main Stage",
             DateTime = DateTime.UtcNow.AddHours(3),
-            ConcertId = concert1.Id // Links to Rock Concert
+            ConcertId = concert1.ID // Links to Rock Concert
         };
 
         var performance3 = new Performance
@@ -133,7 +133,7 @@ public class ApplicationDbContext : DbContext
             Name = "Jazz Ensemble",
             Location = "Jazz Club",
             DateTime = DateTime.UtcNow.AddDays(1).AddHours(2),
-            ConcertId = concert2.Id // Links to Jazz Night
+            ConcertId = concert2.ID // Links to Jazz Night
         };
 
         modelBuilder.Entity<Performance>().HasData(performance1, performance2, performance3);
@@ -141,7 +141,7 @@ public class ApplicationDbContext : DbContext
         // Seed Bookings
         var booking1 = new Booking
         {
-            Id = 1,
+            ID = 1,
             Name = "John's Rock Booking",
             Email = "johndoe@example.com",
             UserId = int.Parse(user1.ID), // Link to John Doe
@@ -150,7 +150,7 @@ public class ApplicationDbContext : DbContext
 
         var booking2 = new Booking
         {
-            Id = 2,
+            ID = 2,
             Name = "Jane's Jazz Booking",
             Email = "janesmith@example.com",
             UserId = int.Parse(user2.ID), // Link to Jane Smith
