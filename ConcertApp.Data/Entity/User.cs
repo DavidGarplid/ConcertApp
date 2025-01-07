@@ -13,20 +13,22 @@ namespace ConcertApp.Data.Entity
     {
         [Key]
         [StringLength(36), MinLength(36)]
-        string ID { get; set; }
+        public string ID { get; set; }
 
         [Required]
         [StringLength(25)]
-        string name { get; set; }
+        public string name { get; set; }
 
         [Required]
         [StringLength(50)]
-        string email { get; set; }
+        public string email { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
         [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 100 characters long.")]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
     ErrorMessage = "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.")]
-        string password { get; set; }
+        public string password { get; set; }
+
+        public ICollection<Booking> Bookings { get; set; }
     }
 }

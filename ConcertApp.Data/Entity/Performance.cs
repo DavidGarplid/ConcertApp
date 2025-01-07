@@ -12,5 +12,9 @@ namespace ConcertApp.Data.Entity
         public string Name { get; set; }
         public string Location { get; set; }
         public DateTime DateTime { get; set; }
+        public int ConcertId { get; set; }
+        public Concert Concert { get; set; }
+
+        public ICollection<Booking> Bookings { get; set; }
     }
 }

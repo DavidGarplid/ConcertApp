@@ -11,6 +11,6 @@ namespace ConcertApp.Data.Entity
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Performance Performance { get; set; }
+        public ICollection<Performance> Performances { get; set; }
     }
 }
