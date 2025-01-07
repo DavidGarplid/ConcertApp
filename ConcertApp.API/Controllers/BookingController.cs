@@ -4,13 +4,18 @@ using ConcertApp.Data.DTO;
 using ConcertApp.Data.Entity;
 using ConcertApp.Data.Repository;
 namespace ConcertApp.API.Controllers;
-public enum ErrorCode
+public enum ErrorCode2
 {
     InvalidBooking,
-    UserBookingExistsExists,
+    BookingExists,
     CouldNotCreateBooking,
     BookingNotFound,
-    CouldNotDeleteBooking
+    CouldNotDeleteBooking,
+    BookingRequired,
+    CouldNotUpdateItem,
+    RecordNotFound
+
+
 
 }
 
@@ -39,20 +44,20 @@ public class BookingController : ControllerBase
             item = _mapper.Map<Booking>(dto);
             if (item == null || !ModelState.IsValid)
             {
-                return BadRequest(ErrorCode.InvalidBooking.ToString());
+                return BadRequest(ErrorCode2.InvalidBooking.ToString());
             }
             bool itemExists = await _unitOfWork.Bookings.Find(item.ID);
             if (itemExists)
             {
                 return StatusCode(StatusCodes.Status409Conflict,
-                ErrorCode.BookingExists.ToString());
+                ErrorCode2.BookingExists.ToString());
             }
             _unitOfWork.Bookings.Insert(item);
             int affectedItems = await _unitOfWork.Complete();
         }
         catch (Exception)
         {
-            return BadRequest(ErrorCode.CouldNotCreateBooking.ToString());
+            return BadRequest(ErrorCode2.CouldNotCreateBooking.ToString());
         }
         return Ok(_mapper.Map<BookingDto>(item));
     }
@@ -66,7 +71,7 @@ public class BookingController : ControllerBase
             item = await _unitOfWork.Bookings.Find(id);
             if (item == null)
             {
-                return NotFound(ErrorCode.BookingNotFound.ToString());
+                return NotFound(ErrorCode2.BookingNotFound.ToString());
             }
             //_todoRepository.Delete(id);
             
@@ -75,7 +80,7 @@ public class BookingController : ControllerBase
         }
         catch (Exception)
         {
-            return BadRequest(ErrorCode.CouldNotDeleteBooking.ToString());
+            return BadRequest(ErrorCode2.CouldNotDeleteBooking.ToString());
         }
         //return NoContent();
         return Ok(_mapper.Map<BookingDto>(item));
@@ -90,12 +95,12 @@ public class BookingController : ControllerBase
             item = _mapper.Map<Booking>(dto);
             if (item == null || !ModelState.IsValid)
             {
-                return BadRequest(ErrorCode.BookingRequired.ToString());
+                return BadRequest(ErrorCode2.BookingRequired.ToString());
             }
             var existingItem = await _unitOfWork.Bookings.Find(item.ID);
             if (existingItem == null)
             {
-                return NotFound(ErrorCode.RecordNotFound.ToString());
+                return NotFound(ErrorCode2.RecordNotFound.ToString());
             }
             item.Performances = existingItem.Performances;
             //_todoRepository.Update(item);
@@ -106,7 +111,7 @@ public class BookingController : ControllerBase
         }
         catch (Exception)
         {
-            return BadRequest(ErrorCode.CouldNotUpdateItem.ToString());
+            return BadRequest(ErrorCode2.CouldNotUpdateItem.ToString());
         }
         
 //return NoContent();

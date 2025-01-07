@@ -40,7 +40,7 @@ public class UserController : ControllerBase
             {
                 return BadRequest(ErrorCode.InvalidUser.ToString());
             }
-            bool itemExists = await _unitOfWork.Users.DoesItemExist(item.ID);
+            bool itemExists = await _unitOfWork.Users.Find(item.ID);
             if (itemExists)
             {
                 return StatusCode(StatusCodes.Status409Conflict,
