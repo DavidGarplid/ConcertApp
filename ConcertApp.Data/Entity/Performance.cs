@@ -15,6 +15,6 @@ namespace ConcertApp.Data.Entity
         public int ConcertId { get; set; }
         public Concert Concert { get; set; }
 
-        public ICollection<Booking> Bookings { get; set; }
+        //public ICollection<Booking> Bookings { get; set; }
     }
 }
