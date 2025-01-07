@@ -75,7 +75,7 @@ public class ApplicationDbContext : DbContext
         // Seed Users
         var user1 = new User
         {
-            ID = Guid.NewGuid().ToString(),
+            ID = 1,
             name = "John Doe",
             email = "johndoe@example.com",
             password = "P@ssw0rd123" // Ensure it meets the password requirements
@@ -83,7 +83,7 @@ public class ApplicationDbContext : DbContext
 
         var user2 = new User
         {
-            ID = Guid.NewGuid().ToString(),
+            ID = 2,
             name = "Jane Smith",
             email = "janesmith@example.com",
             password = "Str0ngP@ssword!"
@@ -111,7 +111,7 @@ public class ApplicationDbContext : DbContext
         // Seed Performances
         var performance1 = new Performance
         {
-            ID = Guid.NewGuid().ToString(),
+            ID = 1,
             Name = "Opening Act",
             Location = "Main Stage",
             DateTime = DateTime.UtcNow.AddHours(1),
@@ -120,7 +120,7 @@ public class ApplicationDbContext : DbContext
 
         var performance2 = new Performance
         {
-            ID = Guid.NewGuid().ToString(),
+            ID = 2,
             Name = "Metallica",
             Location = "Main Stage",
             DateTime = DateTime.UtcNow.AddHours(3),
@@ -129,7 +129,7 @@ public class ApplicationDbContext : DbContext
 
         var performance3 = new Performance
         {
-            ID = Guid.NewGuid().ToString(),
+            ID = 3,
             Name = "Jazz Ensemble",
             Location = "Jazz Club",
             DateTime = DateTime.UtcNow.AddDays(1).AddHours(2),
@@ -144,7 +144,7 @@ public class ApplicationDbContext : DbContext
             ID = 1,
             Name = "John's Rock Booking",
             Email = "johndoe@example.com",
-            UserId = int.Parse(user1.ID), // Link to John Doe
+            UserId = user1.ID, // Link to John Doe
             PerformanceID = performance2.ID // Will need to set a Performance ID if available
         };
 
@@ -153,7 +153,7 @@ public class ApplicationDbContext : DbContext
             ID = 2,
             Name = "Jane's Jazz Booking",
             Email = "janesmith@example.com",
-            UserId = int.Parse(user2.ID), // Link to Jane Smith
+            UserId = user2.ID, // Link to Jane Smith
             PerformanceID = performance3.ID // Will need to set a Performance ID if available
         };
 

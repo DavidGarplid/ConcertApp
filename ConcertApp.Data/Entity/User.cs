@@ -13,7 +13,7 @@ namespace ConcertApp.Data.Entity
     {
         [Key]
         [StringLength(36), MinLength(36)]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [StringLength(25)]

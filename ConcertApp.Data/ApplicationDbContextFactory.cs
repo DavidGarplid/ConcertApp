@@ -10,7 +10,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
         var builder = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
         .AddJsonFile("appsettings.json").Build();
-        var connectionString = builder.GetConnectionString("User");
+        var connectionString = builder.GetConnectionString("ConcertApp");
         if (string.IsNullOrEmpty(connectionString))
             throw new InvalidOperationException("The connection string was not set.");
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
