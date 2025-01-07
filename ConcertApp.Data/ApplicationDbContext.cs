@@ -62,16 +62,101 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(b => b.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
-            //entity.HasOne(b => b.Performance)
-            //.WithMany(p => p.Bookings)
-            //.HasForeignKey(p => p.Id)
-            //.OnDelete(DeleteBehavior.Restrict);
+            entity.HasOne(b => b.Performance)
+            .WithMany(p => p.Bookings)
+            .HasForeignKey(p => p.PerformanceID)
+            .OnDelete(DeleteBehavior.Restrict);
 
             SeedData(modelBuilder);
         });
     }
-    private void SeedData(ModelBuilder builder)
+    private void SeedData(ModelBuilder modelBuilder)
     {
+        // Seed Users
+        var user1 = new User
+        {
+            ID = Guid.NewGuid().ToString(),
+            name = "John Doe",
+            email = "johndoe@example.com",
+            password = "P@ssw0rd123" // Ensure it meets the password requirements
+        };
 
+        var user2 = new User
+        {
+            ID = Guid.NewGuid().ToString(),
+            name = "Jane Smith",
+            email = "janesmith@example.com",
+            password = "Str0ngP@ssword!"
+        };
+
+        modelBuilder.Entity<User>().HasData(user1, user2);
+
+        // Seed Concerts
+        var concert1 = new Concert
+        {
+            Id = 1,
+            Name = "Rock Concert",
+            Description = "A night of amazing rock music."
+        };
+
+        var concert2 = new Concert
+        {
+            Id = 2,
+            Name = "Jazz Night",
+            Description = "Smooth jazz performances all evening."
+        };
+
+        modelBuilder.Entity<Concert>().HasData(concert1, concert2);
+
+        // Seed Performances
+        var performance1 = new Performance
+        {
+            ID = Guid.NewGuid().ToString(),
+            Name = "Opening Act",
+            Location = "Main Stage",
+            DateTime = DateTime.UtcNow.AddHours(1),
+            ConcertId = concert1.Id // Links to Rock Concert
+        };
+
+        var performance2 = new Performance
+        {
+            ID = Guid.NewGuid().ToString(),
+            Name = "Metallica",
+            Location = "Main Stage",
+            DateTime = DateTime.UtcNow.AddHours(3),
+            ConcertId = concert1.Id // Links to Rock Concert
+        };
+
+        var performance3 = new Performance
+        {
+            ID = Guid.NewGuid().ToString(),
+            Name = "Jazz Ensemble",
+            Location = "Jazz Club",
+            DateTime = DateTime.UtcNow.AddDays(1).AddHours(2),
+            ConcertId = concert2.Id // Links to Jazz Night
+        };
+
+        modelBuilder.Entity<Performance>().HasData(performance1, performance2, performance3);
+
+        // Seed Bookings
+        var booking1 = new Booking
+        {
+            Id = 1,
+            Name = "John's Rock Booking",
+            Email = "johndoe@example.com",
+            UserId = int.Parse(user1.ID), // Link to John Doe
+            PerformanceID = performance2.ID // Will need to set a Performance ID if available
+        };
+
+        var booking2 = new Booking
+        {
+            Id = 2,
+            Name = "Jane's Jazz Booking",
+            Email = "janesmith@example.com",
+            UserId = int.Parse(user2.ID), // Link to Jane Smith
+            PerformanceID = performance3.ID // Will need to set a Performance ID if available
+        };
+
+        modelBuilder.Entity<Booking>().HasData(booking1, booking2);
     }
 } 
