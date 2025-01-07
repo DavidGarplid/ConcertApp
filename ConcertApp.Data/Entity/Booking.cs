@@ -14,7 +14,7 @@ namespace ConcertApp.Data.Entity
         public User User { get; set; }
         public int UserId { get; set; }
         public Performance Performance { get; set; }
-        public string PerformanceID { get; set; }
+        public int PerformanceID { get; set; }
         
     }
 }
