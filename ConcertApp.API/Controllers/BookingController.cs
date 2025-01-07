@@ -107,7 +107,7 @@ public class BookingController : ControllerBase
         {
             return BadRequest(ErrorCode.CouldNotUpdateItem.ToString());
         }
-        30
+        
 //return NoContent();
 return Ok(_mapper.Map<BookingDto>(item));
     }
