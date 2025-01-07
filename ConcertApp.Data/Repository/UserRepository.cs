@@ -17,7 +17,7 @@ namespace ConcertApp.Data.Repository
             : base(context)
         {
         }
-        public async Task<User> Find(string id)
+        public async Task<User> Find(int id)
         {
             return await DbContext.Users.FindAsync(id);
         }

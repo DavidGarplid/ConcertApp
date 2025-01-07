@@ -10,6 +10,6 @@ namespace ConcertApp.Data.Repository
     public interface IUserRepository : IRepository<User>
     {
         public Task CreateAsync(User user);
-        Task<User?> Find(string id);
+        Task<User?> Find(int id);
     }
 }

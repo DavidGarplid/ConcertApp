@@ -46,11 +46,11 @@ public class BookingController : ControllerBase
             {
                 return BadRequest(ErrorCode2.InvalidBooking.ToString());
             }
-      
-            var existingUser = await _unitOfWork.Bookings.Find(item.ID);
-            if (existingUser != null)
+            Booking itemExists = await _unitOfWork.Bookings.Find(item.ID);
+            if (itemExists != null)
             {
-                return StatusCode(StatusCodes.Status409Conflict, ErrorCode2.BookingExists.ToString());
+                return StatusCode(StatusCodes.Status409Conflict,
+                ErrorCode2.BookingExists.ToString());
             }
             _unitOfWork.Bookings.Insert(item);
             int affectedItems = await _unitOfWork.Complete();

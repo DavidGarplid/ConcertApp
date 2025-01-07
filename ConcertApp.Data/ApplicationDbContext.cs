@@ -42,7 +42,7 @@ public class ApplicationDbContext : DbContext
             entity.ToTable("Performances");
             entity.HasKey(p => p.ID);
             entity.Property(p => p.Name).IsRequired().HasMaxLength(100);
-            entity.Property(p => p.DateTime).IsRequired().HasMaxLength(100);
+            entity.Property(p => p.DateTime).IsRequired();
             entity.Property(p => p.Location).IsRequired().HasMaxLength(100);
             entity.HasOne(p => p.Concert)
             .WithMany(c => c.Performances)
@@ -67,7 +67,6 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(p => p.PerformanceID)
             .OnDelete(DeleteBehavior.Restrict);
 
-            SeedData(modelBuilder);
         });
     }
     private void SeedData(ModelBuilder modelBuilder)
