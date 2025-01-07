@@ -22,7 +22,7 @@ namespace ConcertApp.Data.Repository
             {
                 throw new ArgumentNullException(nameof(concert));
             }
-            var existingBooking = await Context.Set<Concert>().FindAsync(concert.Id);
+            var existingBooking = await Context.Set<Concert>().FindAsync(concert.ID);
             Context.Entry(existingBooking).CurrentValues.SetValues(concert);
 
 

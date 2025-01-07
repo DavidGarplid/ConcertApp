@@ -32,7 +32,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Concert>(entity => 
         {
             entity.ToTable("Concerts");
-            entity.HasKey(c => c.Id); //Key
+            entity.HasKey(c => c.ID); //Key
             entity.Property(c => c.Name).IsRequired().HasMaxLength(100);
             entity.Property(c => c.Description).IsRequired().HasMaxLength(100);
         });
@@ -53,7 +53,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Booking>(entity => 
         {
             entity.ToTable("Bookings");
-            entity.HasKey(b  => b.Id);
+            entity.HasKey(b  => b.ID);
             entity.Property(b => b.Name).IsRequired().HasMaxLength(100);
             entity.Property(b => b.Email).IsRequired().HasMaxLength(100);
 
