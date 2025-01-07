@@ -86,7 +86,7 @@ using ConcertApp.MAUI.Views;
 using ConcertApp.MAUI;
 using System.Net.Http;
 
-namespace Todo.MAUI;
+namespace ConcertApp.MAUI;
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()

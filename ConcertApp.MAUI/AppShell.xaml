@@ -11,7 +11,7 @@
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="LoginPage" /> 
+        Route="LoginPage" />
     <!--  ska dessa vara MainPage som routing?  -->
 
     <ShellContent
