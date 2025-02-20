@@ -22,13 +22,13 @@ public partial class UserViewModel
     public async Task Login()
     {
         // Check if User object is null or properties are empty
-        if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password))
+        if (string.IsNullOrEmpty(User.Email) || string.IsNullOrEmpty(User.Password))
         {
             await Shell.Current.DisplayAlert("Error", "Please enter both email and password", "OK");
             return;
         }
 
-        var result = await _userService.LoginAsync(user);
+        var result = await _userService.LoginAsync(User);
 
         if (result.Contains("Login failed"))
         {
@@ -37,6 +37,7 @@ public partial class UserViewModel
         else
         {
             await Shell.Current.DisplayAlert("Success", "Login successful", "OK");
+            await Shell.Current.GoToAsync("//ConcertPage");
             // Navigate to home or save token
         }
     }

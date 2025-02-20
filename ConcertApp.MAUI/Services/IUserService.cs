@@ -9,5 +9,6 @@ namespace ConcertApp.MAUI.Services
 {
     public interface IUserService
     {
+        Task<string> LoginAsync(User user);
     }
 }

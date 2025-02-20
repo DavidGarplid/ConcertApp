@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConcertApp.MAUI.Services
 {
-    public interface IBookingService : IRestService<Booking>
+    public interface IBookingService 
     {
     }
 }

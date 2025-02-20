@@ -15,17 +15,17 @@
     <!--  ska dessa vara MainPage som routing?  -->
 
     <ShellContent
-        Title="Home"
+        Title="Concert"
         ContentTemplate="{DataTemplate views:ConcertPage}"
         Route="ConcertPage" />
 
     <ShellContent
-        Title="Home"
+        Title="Performace"
         ContentTemplate="{DataTemplate views:PerformancePage}"
         Route="PerformancePage" />
 
     <ShellContent
-        Title="Home"
+        Title="Booking"
         ContentTemplate="{DataTemplate views:BookingPage}"
         Route="BookingPage" />
 

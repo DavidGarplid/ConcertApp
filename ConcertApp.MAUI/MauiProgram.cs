@@ -139,9 +139,10 @@ public static class MauiProgram
         //    var client = new HttpClient(handler);
         //    return new RestService<Performance>(client, provider.GetRequiredService<IMapper>(), "https://localhost:5001/api/performance");
         //});
-
-        builder.Services.AddScoped<HttpClient>();
-        builder.Services.AddScoped<UserService>();
+        builder.Services.AddSingleton<HttpClient>();
+        //builder.Services.AddScoped<HttpClient>();
+        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddSingleton<IRestService<User>, RestService<User>>();
         builder.Services.AddScoped<ConcertService>();
         builder.Services.AddScoped<PerformanceService>();
         builder.Services.AddScoped<BookingService>();
