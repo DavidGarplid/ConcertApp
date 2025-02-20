@@ -8,7 +8,11 @@ namespace ConcertApp.MAUI.Models
 {
     public class Booking
     {
-        public string ID { get; set; } = null!;
-        
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public int UserID { get; set; }
+        public int PerformanceID { get; set; }
+
     }
 }

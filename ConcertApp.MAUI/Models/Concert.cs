@@ -8,6 +8,8 @@ namespace ConcertApp.MAUI.Models
 {
     public class Concert
     {
-        public string ID { get; set; } = null!;
+        public int ID { get; set; }
+        public string Title { get; set; } = null!;
+        public string Description { get; set; } = null!;
     }
 }

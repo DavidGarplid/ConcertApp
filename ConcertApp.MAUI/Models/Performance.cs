@@ -8,6 +8,10 @@ namespace ConcertApp.MAUI.Models
 {
     public class Performance
     {
-        public string ID { get; set; } = null!;
+        public int ID { get; set; }
+        public string Name { get; set; } = null!;
+        public DateTime Date { get; set; }
+        public string Location { get; set; } = null!;
+        public int ConcertId { get; set; }
     }
 }
