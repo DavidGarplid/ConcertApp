@@ -8,8 +8,8 @@ namespace ConcertApp.Data.DTO
 {
     public class UserDto
     {
-        public int? ID { get; set; } 
-        public string Name { get; set; } = null!;
+        public int? ID { get; set; }
+        public string? Name { get; set; }
         public string Email { get; set; } = null!;
         public string Password { get; set; }
     }

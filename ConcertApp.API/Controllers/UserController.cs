@@ -9,7 +9,8 @@ public enum ErrorCode
     InvalidUser,
     UserExists,
     CouldNotCreateUser,
-    
+    InvalidCredentials
+
 }
 
 [Route("api/[controller]")]
@@ -63,5 +64,26 @@ public class UserController : ControllerBase
             return BadRequest($"CouldNotCreateUser: {ex.Message}");
         }
         return Ok(_mapper.Map<UserDto>(item));
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] UserDto loginDto)
+    {
+        if (loginDto == null || string.IsNullOrEmpty(loginDto.Email) || string.IsNullOrEmpty(loginDto.Password))
+        {
+            return BadRequest("Email and password are required");
+        }
+
+        // Find the user by email
+        var users = await _unitOfWork.Users.All();
+        var user = users.FirstOrDefault(u => u.email == loginDto.Email);
+
+        if (user == null || user.password != loginDto.Password)
+        {
+            return Unauthorized(ErrorCode.InvalidCredentials.ToString()); // Invalid email or password
+        }
+
+        // If login is successful, return the user info
+        return Ok(_mapper.Map<UserDto>(user));
     }
 }
