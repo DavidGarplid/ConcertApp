@@ -8,7 +8,7 @@ namespace ConcertApp.Data.DTO
 {
     public class ConcertDto
     {
-        public string ID { get; set; } = null!;
+        public int ID { get; set; } 
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         //koppling till performance (performances?)
