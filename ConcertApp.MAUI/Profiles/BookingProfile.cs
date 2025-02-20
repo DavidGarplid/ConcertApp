@@ -12,22 +12,24 @@ namespace ConcertApp.MAUI.Profiles
     public class BookingProfile : Profile
     {
         public BookingProfile()
-        { 
+        {
             // Map Model to DTO
             // Note that "dest.Name" gets its value from "src.TaskName"
-            //CreateMap<Booking, BookingDto>()
-            //    .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
-            //    .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.TaskName))
-            //    .ForMember(dest => dest.Notes, opt => opt.MapFrom(src => src.Notes))
-            //    .ForMember(dest => dest.Done, opt => opt.MapFrom(src => src.Done));
+            CreateMap<Booking, Booking>()
+                .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.UserID, opt => opt.MapFrom(src => src.UserID))
+                .ForMember(dest => dest.PerformanceID, opt => opt.MapFrom(src => src.PerformanceID));
             // Map DTO to Model
             // Note that "dest.TaskName" gets its value from "src.Name"
-            //CreateMap<TodoItemDto, TodoItem>()
-            //    .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
-            //    .ForMember(dest => dest.TaskName, opt => opt.MapFrom(src => src.Name))
-            //    .ForMember(dest => dest.Notes, opt => opt.MapFrom(src => src.Notes))
-            //    .ForMember(dest => dest.Done, opt => opt.MapFrom(src => src.Done));
-            //CreateMap<TodoItem, TodoItemDto>().ReverseMap();
+            CreateMap<BookingDto, Booking>()
+                .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.UserID, opt => opt.MapFrom(src => src.UserID))
+                .ForMember(dest => dest.PerformanceID, opt => opt.MapFrom(src => src.PerformanceID));
+            // CreateMap<Booking, Booking>().ReverseMap();
         }
     }
 }
