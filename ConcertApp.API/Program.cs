@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ConcertApp.Data;
 using ConcertApp.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
+using ConcertApp.API.Profiles;
 [assembly: ApiController]
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,10 @@ options => options.UseSqlServer(builder.Configuration.GetConnectionString("Conce
 );
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+builder.Services.AddAutoMapper(typeof(UserProfile));
+builder.Services.AddAutoMapper(typeof(BookingProfile));
+builder.Services.AddAutoMapper(typeof(PerformanceProfile));
+builder.Services.AddAutoMapper(typeof(ConcertProfile));
 
 
 var app = builder.Build();

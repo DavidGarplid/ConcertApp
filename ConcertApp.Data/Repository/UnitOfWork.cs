@@ -19,6 +19,10 @@ namespace ConcertApp.Data.Repository
         {
             this.context = context;
             Bookings = new BookingRepository(context);
+            Users = new UserRepository(context);
+            Concerts = new ConcertRepository(context);
+            Performances = new PerfomanceRepository(context);
+
         }
         public async Task<int> Complete()
         {

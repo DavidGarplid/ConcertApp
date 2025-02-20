@@ -32,6 +32,15 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] UserDto dto)
     {
+        if (_unitOfWork == null)
+        {
+            return StatusCode(500, "Dependency injection failed: _unitOfWork is null");
+        }
+
+        if (_unitOfWork.Users == null)
+        {
+            return StatusCode(500, "Dependency injection failed: _unitOfWork.Users is null");
+        }
         User item;
         try
         {
@@ -49,9 +58,9 @@ public class UserController : ControllerBase
             _unitOfWork.Users.Insert(item);
             int affectedItems = await _unitOfWork.Complete();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return BadRequest(ErrorCode.CouldNotCreateUser.ToString());
+            return BadRequest($"CouldNotCreateUser: {ex.Message}");
         }
         return Ok(_mapper.Map<UserDto>(item));
     }
