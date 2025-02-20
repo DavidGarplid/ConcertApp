@@ -23,8 +23,8 @@ namespace ConcertApp.API.Profiles
             CreateMap<ConcertDto, Concert>()
             .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title))
-            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-            .ForMember(dest => dest.Performances, opt => opt.MapFrom(src => string.Empty));
+            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+            
 
             //CreateMap<Concert, ConcertDto>().ReverseMap();
 
