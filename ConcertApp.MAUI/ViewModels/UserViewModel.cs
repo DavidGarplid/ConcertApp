@@ -1,7 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ConcertApp.Data.DTO;
 using ConcertApp.MAUI.Models;
 using ConcertApp.MAUI.Services;
+using System.Diagnostics;
 
 namespace ConcertApp.MAUI.ViewModels;
 
@@ -36,9 +39,41 @@ public partial class UserViewModel
         }
         else
         {
+            var (userName, userEmail) = GetUserData();
+
+            // Show the saved data on screen
+            await Shell.Current.DisplayAlert("User Info", $"Name: {userName}\nEmail: {userEmail}", "OK");
+            Debug.WriteLine($"Retrieved User Name: {userName}");
+            Debug.WriteLine($"Retrieved User Email: {userEmail}");
+
             await Shell.Current.DisplayAlert("Success", "Login successful", "OK");
             await Shell.Current.GoToAsync("//ConcertPage");
-            // Navigate to home or save token
+            
         }
     }
+
+    private void SaveUserData(UserDto userDto)
+    {
+        // Save both Name and Email in Preferences
+        Preferences.Set("UserName", userDto.Name);
+        Preferences.Set("UserEmail", userDto.Email);
+    }
+
+
+    // dessa 2 är jag osäker på vart de ska vara
+    public (string userName, string userEmail) GetUserData()
+    {
+        // Retrieve both Name and Email from Preferences
+        string userName = Preferences.Get("UserName", string.Empty);  // Default value is empty string
+        string userEmail = Preferences.Get("UserEmail", string.Empty);  // Default value is empty string
+        Debug.WriteLine($"Retrieved Name: {userName}");
+        Debug.WriteLine($"Retrieved Email: {userEmail}");
+        return (userName, userEmail);
+    }
+    public void ClearUserData()
+    {
+        Preferences.Remove("UserName");
+        Preferences.Remove("UserEmail");
+    }
+
 }
