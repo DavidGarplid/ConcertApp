@@ -112,39 +112,39 @@ public static class MauiProgram
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         // Register RestService for each entity type
-        builder.Services.AddScoped<IRestService<Booking>>(provider =>
-        {
-            var handler = provider.GetRequiredService<IHttpsClientHandlerService>().GetPlatformMessageHandler();
-            var client = new HttpClient(handler);
-            return new RestService<Booking>(client, provider.GetRequiredService<IMapper>(), "https://localhost:5001/api/booking");
-        });
+        //builder.Services.AddScoped<IRestService<Booking>>(provider =>
+        //{
+        //    var handler = provider.GetRequiredService<IHttpsClientHandlerService>().GetPlatformMessageHandler();
+        //    var client = new HttpClient(handler);
+        //    return new RestService<Booking>(client, provider.GetRequiredService<IMapper>(), "https://localhost:5001/api/booking");
+        //});
 
-        builder.Services.AddScoped<IRestService<Concert>>(provider =>
-        {
-            var handler = provider.GetRequiredService<IHttpsClientHandlerService>().GetPlatformMessageHandler();
-            var client = new HttpClient(handler);
-            return new RestService<Concert>(client, provider.GetRequiredService<IMapper>(), "https://localhost:5001/api/concert");
-        });
+        //builder.Services.AddScoped<IRestService<Concert>>(provider =>
+        //{
+        //    var handler = provider.GetRequiredService<IHttpsClientHandlerService>().GetPlatformMessageHandler();
+        //    var client = new HttpClient(handler);
+        //    return new RestService<Concert>(client, provider.GetRequiredService<IMapper>(), "https://localhost:5001/api/concert");
+        //});
 
-        builder.Services.AddScoped<IRestService<User>>(provider =>
-        {
-            var handler = provider.GetRequiredService<IHttpsClientHandlerService>().GetPlatformMessageHandler();
-            var client = new HttpClient(handler);
-            return new RestService<User>(client, provider.GetRequiredService<IMapper>(), "https://localhost:5001/api/user");
-        });
+        //builder.Services.AddScoped<IRestService<User>>(provider =>
+        //{
+        //    var handler = provider.GetRequiredService<IHttpsClientHandlerService>().GetPlatformMessageHandler();
+        //    var client = new HttpClient(handler);
+        //    return new RestService<User>(client, provider.GetRequiredService<IMapper>(), "https://localhost:5001/api/user");
+        //});
 
-        builder.Services.AddScoped<IRestService<Performance>>(provider =>
-        {
-            var handler = provider.GetRequiredService<IHttpsClientHandlerService>().GetPlatformMessageHandler();
-            var client = new HttpClient(handler);
-            return new RestService<Performance>(client, provider.GetRequiredService<IMapper>(), "https://localhost:5001/api/performance");
-        });
+        //builder.Services.AddScoped<IRestService<Performance>>(provider =>
+        //{
+        //    var handler = provider.GetRequiredService<IHttpsClientHandlerService>().GetPlatformMessageHandler();
+        //    var client = new HttpClient(handler);
+        //    return new RestService<Performance>(client, provider.GetRequiredService<IMapper>(), "https://localhost:5001/api/performance");
+        //});
 
-        // Register EntityService for each entity type
-        builder.Services.AddScoped<IConcertAppService<Booking>, ConcertApp.MAUI.Services.ConcertAppService<Booking>>();
-        builder.Services.AddScoped<IConcertAppService<Concert>, ConcertApp.MAUI.Services.ConcertAppService<Concert>>();
-        builder.Services.AddScoped<IConcertAppService<User>, ConcertApp.MAUI.Services.ConcertAppService<User>>();
-        builder.Services.AddScoped<IConcertAppService<Performance>, ConcertApp.MAUI.Services.ConcertAppService<Performance>>();
+        builder.Services.AddScoped<HttpClient>();
+        builder.Services.AddScoped<UserService>();
+        builder.Services.AddScoped<ConcertService>();
+        builder.Services.AddScoped<PerformanceService>();
+        builder.Services.AddScoped<BookingService>();
 
         // Pages
         builder.Services.AddSingleton<LoginPage>();

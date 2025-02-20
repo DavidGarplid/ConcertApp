@@ -10,77 +10,52 @@ namespace ConcertApp.MAUI.Services
 {
     public class RestService<T> : IRestService<T>
     {
-        private readonly HttpClient _client;
-        private readonly JsonSerializerOptions _serializerOptions;
-        private readonly IMapper _mapper;
-        private readonly string _endpoint;
+        private readonly HttpClient _httpClient;
+        private readonly string _baseUrl;
 
-        public RestService(HttpClient client, IMapper mapper, string endpoint)
+
+        public RestService(HttpClient httpClient, string entity)
         {
-            _client = client;
-            _mapper = mapper;
-            _endpoint = endpoint;
+            _httpClient = httpClient;
+            _baseUrl = $"https://localhost:5001/api/{entity}";
+        }
+        public async Task<List<T>> GetAllAsync()
+        {
+            var response = await _httpClient.GetAsync(_baseUrl);
+            if (!response.IsSuccessStatusCode) return null;
 
-            _serializerOptions = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true
-            };
+            string content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<List<T>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+        public async Task<T> GetByIdAsync(int id)
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/{id}");
+            if (!response.IsSuccessStatusCode) return default;
+
+            string content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<T>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+        public async Task<bool> CreateAsync(T entity)
+        {
+            string json = JsonSerializer.Serialize(entity);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync(_baseUrl, content);
+            return response.IsSuccessStatusCode;
+        }
+        public async Task<bool> UpdateAsync(int id, T entity)
+        {
+            string json = JsonSerializer.Serialize(entity);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync($"{_baseUrl}/{id}", content);
+            return response.IsSuccessStatusCode;
         }
 
-        public async Task<List<T>?> RefreshDataAsync()
+        public async Task<bool> DeleteAsync(int id)
         {
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(_endpoint);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<List<T>>(content, _serializerOptions);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"ERROR: {ex.Message}");
-            }
-            return null;
-        }
-
-        public async Task SaveItemAsync(T item, bool isNewItem)
-        {
-            try
-            {
-                string json = JsonSerializer.Serialize(item, _serializerOptions);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = isNewItem
-                    ? await _client.PostAsync(_endpoint, content)
-                    : await _client.PutAsync(_endpoint, content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine("Item successfully saved.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"ERROR: {ex.Message}");
-            }
-        }
-
-        public async Task DeleteItemAsync(string id)
-        {
-            try
-            {
-                HttpResponseMessage response = await _client.DeleteAsync($"{_endpoint}/{id}");
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine("Item successfully deleted.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"ERROR: {ex.Message}");
-            }
+            var response = await _httpClient.DeleteAsync($"{_baseUrl}/{id}");
+            return response.IsSuccessStatusCode;
         }
     }
 }

@@ -9,9 +9,11 @@ namespace ConcertApp.MAUI.Services
 {
     public interface IRestService<T>
     {
-        Task<List<T>?> RefreshDataAsync();
-        Task SaveItemAsync(T item, bool isNewItem);
-        Task DeleteItemAsync(string id);
+        Task<List<T>> GetAllAsync();
+        Task<T> GetByIdAsync(int id);
+        Task<bool> CreateAsync(T entity);
+        Task<bool> UpdateAsync(int id, T entity);
+        Task<bool> DeleteAsync(int id);
 
 
 
