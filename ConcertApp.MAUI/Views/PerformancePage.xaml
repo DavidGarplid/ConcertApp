@@ -3,11 +3,26 @@
     x:Class="ConcertApp.MAUI.Views.PerformancePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="PerformancePage">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
+    Title="Concert Performances">
+
+    <VerticalStackLayout Padding="20">
+        <Label Text="Performances for this Concert" 
+               FontSize="24" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" />
+
+        <CollectionView ItemsSource="{Binding Performance}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5">
+                        <StackLayout>
+                            <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"/>
+                            <Label Text="{Binding DateTime}" FontSize="14" TextColor="Gray"/>
+                            <Label Text="{Binding Location}" FontSize="14" TextColor="Gray"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>
