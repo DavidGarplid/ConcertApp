@@ -29,5 +29,16 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+    Title="ConcertPage">
+    <VerticalStackLayout>
+        <Label
+            HorizontalOptions="Center"
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" />
+
+        <Button Text="Logout" Command="{Binding LogoutCommand}" />
     </VerticalStackLayout>
+    
+    
+    
 </ContentPage>

@@ -1,6 +1,6 @@
 ﻿using ConcertApp.Data.Entity;
 using Microsoft.EntityFrameworkCore;
-using ConcertApp.Data.Entity;
+
 namespace ConcertApp.Data;
 public class ApplicationDbContext : DbContext
 {

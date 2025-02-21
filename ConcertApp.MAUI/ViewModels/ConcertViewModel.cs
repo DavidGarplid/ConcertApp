@@ -14,6 +14,16 @@ namespace ConcertApp.MAUI.ViewModels
 {
     public partial class ConcertViewModel
     {
+
+
+
+
+        [RelayCommand]
+        public async Task Logout()
+        {
+            Preferences.Clear(); 
+            await Shell.Current.GoToAsync("//LoginPage"); 
+        }
         private readonly ConcertService _concertService;
         public ObservableCollection<Concert> Concerts { get; set; }
 
