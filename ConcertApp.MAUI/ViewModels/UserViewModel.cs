@@ -39,7 +39,7 @@ public partial class UserViewModel
         }
         else
         {
-            var (userName, userEmail) = GetUserData();
+            var (userName, userEmail, userID) = GetUserData();
 
             // Show the saved data on screen
             await Shell.Current.DisplayAlert("User Info", $"Name: {userName}\nEmail: {userEmail}", "OK");
@@ -48,6 +48,7 @@ public partial class UserViewModel
 
             await Shell.Current.DisplayAlert("Success", "Login successful", "OK");
             await Shell.Current.GoToAsync("//MainTabBar");
+            //await Shell.Current.GoToAsync("//BookingPage");
 
         }
     }
@@ -57,23 +58,27 @@ public partial class UserViewModel
         // Save both Name and Email in Preferences
         Preferences.Set("UserName", userDto.Name);
         Preferences.Set("UserEmail", userDto.Email);
+        Preferences.Set("UserID", (int)userDto.ID);
+
     }
 
 
     // dessa 2 är jag osäker på vart de ska vara
-    public (string userName, string userEmail) GetUserData()
+    public (string userName, string userEmail, int userID) GetUserData()
     {
         // Retrieve both Name and Email from Preferences
         string userName = Preferences.Get("UserName", string.Empty);  // Default value is empty string
         string userEmail = Preferences.Get("UserEmail", string.Empty);  // Default value is empty string
+        int userID = Preferences.Get("UserID", 0);
         Debug.WriteLine($"Retrieved Name: {userName}");
         Debug.WriteLine($"Retrieved Email: {userEmail}");
-        return (userName, userEmail);
+        return (userName, userEmail, userID);
     }
     public void ClearUserData()
     {
         Preferences.Remove("UserName");
         Preferences.Remove("UserEmail");
+        Preferences.Remove("UserID");
     }
 
 }

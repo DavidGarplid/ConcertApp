@@ -41,7 +41,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IRestService<User>, RestService<User>>();
         builder.Services.AddScoped<ConcertService>();
         builder.Services.AddScoped<PerformanceService>();
-        builder.Services.AddScoped<BookingService>();
+        builder.Services.AddScoped <IBookingService, BookingService > ();
 
         // Pages
         builder.Services.AddSingleton<LoginPage>();

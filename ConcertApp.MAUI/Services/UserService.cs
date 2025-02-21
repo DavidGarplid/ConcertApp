@@ -49,9 +49,11 @@ namespace ConcertApp.MAUI.Services
                     // Save UserDto data (Name and Email) into Preferences (not returning it)
                     Preferences.Set("UserName", userDto.Name);   // Save user Name
                     Preferences.Set("UserEmail", userDto.Email); // Save user Email
+                    Preferences.Set("UserID", (int)userDto.ID);
 
                     Debug.WriteLine($"UserName saved: {userDto.Name}");
                     Debug.WriteLine($"UserEmail saved: {userDto.Email}");
+                    Debug.WriteLine($"UserID saved: {userDto.ID}");
 
                     return "Login successful";
                 }

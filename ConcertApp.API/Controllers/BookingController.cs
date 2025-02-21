@@ -14,9 +14,6 @@ public enum ErrorCode2
     BookingRequired,
     CouldNotUpdateItem,
     RecordNotFound
-
-
-
 }
 
 [Route("api/[controller]")]
@@ -29,6 +26,31 @@ public class BookingController : ControllerBase
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
+
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetBookingsByUserId(int userId)
+    {
+        try
+        {
+            // Retrieve all bookings from the repository
+            var bookings = await _unitOfWork.Bookings.All();
+            var userBookings = bookings.Where(b => b.UserId == userId).ToList(); // Filter by UserID
+
+            if (!userBookings.Any())
+            {
+                return NotFound(ErrorCode2.BookingNotFound.ToString()); // If no bookings found
+            }
+
+            // Map the result to BookingDto and return
+            return Ok(_mapper.Map<IEnumerable<BookingDto>>(userBookings));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"Error fetching bookings: {ex.Message}");
+        }
+    }
+
+
     [HttpGet]
     public async Task<IActionResult> List()
     {
