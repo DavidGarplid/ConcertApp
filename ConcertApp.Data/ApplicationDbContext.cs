@@ -67,14 +67,15 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(p => p.PerformanceID)
             .OnDelete(DeleteBehavior.Restrict);
 
+            SeedData(modelBuilder);
         });
     }
-    private void SeedData(ModelBuilder modelBuilder)
+    private static void SeedData(ModelBuilder modelBuilder)
     {
         // Seed Users
         var user1 = new User
         {
-            ID = 1,
+            ID = 5,
             name = "John Doe",
             email = "johndoe@example.com",
             password = "P@ssw0rd123" // Ensure it meets the password requirements
@@ -82,7 +83,7 @@ public class ApplicationDbContext : DbContext
 
         var user2 = new User
         {
-            ID = 2,
+            ID = 6,
             name = "Jane Smith",
             email = "janesmith@example.com",
             password = "Str0ngP@ssword!"
@@ -135,7 +136,16 @@ public class ApplicationDbContext : DbContext
             ConcertId = concert2.ID // Links to Jazz Night
         };
 
-        modelBuilder.Entity<Performance>().HasData(performance1, performance2, performance3);
+        var performance4 = new Performance
+        {
+            ID = 4,
+            Name = "Dj Huvudvärk",
+            Location = "DJ Stage",
+            DateTime = DateTime.UtcNow.AddDays(1).AddHours(2),
+            ConcertId = concert2.ID // Links to Jazz Night
+        };
+
+        modelBuilder.Entity<Performance>().HasData(performance1, performance2, performance3, performance4);
 
         // Seed Bookings
         var booking1 = new Booking

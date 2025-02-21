@@ -1,12 +1,42 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using ConcertApp.MAUI.Models;
+using ConcertApp.MAUI.Services;
+using ConcertApp.MAUI.Views;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ConcertApp.MAUI.ViewModels
 {
     public partial class ConcertViewModel
     {
+        private readonly ConcertService _concertService;
+        public ObservableCollection<Concert> Concerts { get; set; }
+
+        public ConcertViewModel()
+        {
+            _concertService = new ConcertService();
+            Concerts = new ObservableCollection<Concert>();
+
+            LoadConcerts();
+        }
+
+        private async void LoadConcerts()
+        {
+            var concerts = await _concertService.GetAllConcertsAsync();
+            foreach (var concert in concerts)
+            {
+                Concerts.Add(concert);
+            }
+        }
+        [RelayCommand]
+        private async Task NavigateToPerformances(int concertId)
+        {
+            await Shell.Current.GoToAsync("//PerformancePage");
+        }
     }
 }
