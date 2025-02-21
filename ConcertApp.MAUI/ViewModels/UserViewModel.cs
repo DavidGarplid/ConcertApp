@@ -47,8 +47,8 @@ public partial class UserViewModel
             Debug.WriteLine($"Retrieved User Email: {userEmail}");
 
             await Shell.Current.DisplayAlert("Success", "Login successful", "OK");
-            await Shell.Current.GoToAsync("//ConcertPage");
-            
+            await Shell.Current.GoToAsync("//MainTabBar");
+
         }
     }
 

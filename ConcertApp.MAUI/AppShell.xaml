@@ -12,21 +12,27 @@
         Title="Home"
         ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage" />
-    <!--  ska dessa vara MainPage som routing?  -->
+
 
     <ShellContent
         Title="Concert"
         ContentTemplate="{DataTemplate views:ConcertPage}"
         Route="ConcertPage" />
 
-    <ShellContent
-        Title="Performace"
-        ContentTemplate="{DataTemplate views:PerformancePage}"
-        Route="PerformancePage" />
+    <TabBar Route="MainTabBar">
+        <Tab Title="Concerts">
+            <ShellContent
+                Title="Concerts"
+                ContentTemplate="{DataTemplate views:ConcertPage}"
+                Route="ConcertPage" />
+        </Tab>
 
-    <ShellContent
-        Title="Booking"
-        ContentTemplate="{DataTemplate views:BookingPage}"
-        Route="BookingPage" />
+        <Tab Title="Bookings" Icon="booking.png">
+            <ShellContent
+                Title="Bookings"
+                ContentTemplate="{DataTemplate views:BookingPage}"
+                Route="BookingPage" />
+        </Tab>
+    </TabBar>
 
 </Shell>
