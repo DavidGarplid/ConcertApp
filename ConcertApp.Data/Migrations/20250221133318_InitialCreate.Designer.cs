@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConcertApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250107151150_InitialFix2")]
-    partial class InitialFix2
+    [Migration("20250221133318_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,24 @@ namespace ConcertApp.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Bookings", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Email = "johndoe@example.com",
+                            Name = "John's Rock Booking",
+                            PerformanceID = 2,
+                            UserId = 5
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Email = "janesmith@example.com",
+                            Name = "Jane's Jazz Booking",
+                            PerformanceID = 3,
+                            UserId = 6
+                        });
                 });
 
             modelBuilder.Entity("ConcertApp.Data.Entity.Concert", b =>
@@ -79,6 +97,20 @@ namespace ConcertApp.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Concerts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Description = "A night of amazing rock music.",
+                            Name = "Rock Concert"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Description = "Smooth jazz performances all evening.",
+                            Name = "Jazz Night"
+                        });
                 });
 
             modelBuilder.Entity("ConcertApp.Data.Entity.Performance", b =>
@@ -110,6 +142,40 @@ namespace ConcertApp.Data.Migrations
                     b.HasIndex("ConcertId");
 
                     b.ToTable("Performances", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            ConcertId = 1,
+                            DateTime = new DateTime(2025, 2, 20, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Main Stage",
+                            Name = "Opening Act"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            ConcertId = 1,
+                            DateTime = new DateTime(2025, 2, 20, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Main Stage",
+                            Name = "Metallica"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            ConcertId = 2,
+                            DateTime = new DateTime(2025, 2, 21, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Jazz Club",
+                            Name = "Jazz Ensemble"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            ConcertId = 2,
+                            DateTime = new DateTime(2025, 2, 21, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "DJ Stage",
+                            Name = "Dj Huvudvärk"
+                        });
                 });
 
             modelBuilder.Entity("ConcertApp.Data.Entity.User", b =>
@@ -139,6 +205,22 @@ namespace ConcertApp.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 5,
+                            email = "johndoe@example.com",
+                            name = "John Doe",
+                            password = "Password123"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            email = "janesmith@example.com",
+                            name = "Jane Smith",
+                            password = "Str0ngP@ssword!"
+                        });
                 });
 
             modelBuilder.Entity("ConcertApp.Data.Entity.Booking", b =>

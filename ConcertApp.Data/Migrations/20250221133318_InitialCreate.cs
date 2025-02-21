@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ConcertApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,7 +50,7 @@ namespace ConcertApp.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DateTime = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: false),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ConcertId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -106,8 +106,8 @@ namespace ConcertApp.Data.Migrations
                 columns: new[] { "ID", "email", "name", "password" },
                 values: new object[,]
                 {
-                    { 1, "johndoe@example.com", "John Doe", "P@ssw0rd123" },
-                    { 2, "janesmith@example.com", "Jane Smith", "Str0ngP@ssword!" }
+                    { 5, "johndoe@example.com", "John Doe", "Password123" },
+                    { 6, "janesmith@example.com", "Jane Smith", "Str0ngP@ssword!" }
                 });
 
             migrationBuilder.InsertData(
@@ -115,9 +115,10 @@ namespace ConcertApp.Data.Migrations
                 columns: new[] { "ID", "ConcertId", "DateTime", "Location", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2025, 1, 7, 15, 58, 37, 940, DateTimeKind.Utc).AddTicks(7047), "Main Stage", "Opening Act" },
-                    { 2, 1, new DateTime(2025, 1, 7, 17, 58, 37, 940, DateTimeKind.Utc).AddTicks(7548), "Main Stage", "Metallica" },
-                    { 3, 2, new DateTime(2025, 1, 8, 16, 58, 37, 940, DateTimeKind.Utc).AddTicks(7552), "Jazz Club", "Jazz Ensemble" }
+                    { 1, 1, new DateTime(2025, 2, 20, 18, 0, 0, 0, DateTimeKind.Unspecified), "Main Stage", "Opening Act" },
+                    { 2, 1, new DateTime(2025, 2, 20, 21, 0, 0, 0, DateTimeKind.Unspecified), "Main Stage", "Metallica" },
+                    { 3, 2, new DateTime(2025, 2, 21, 19, 30, 0, 0, DateTimeKind.Unspecified), "Jazz Club", "Jazz Ensemble" },
+                    { 4, 2, new DateTime(2025, 2, 21, 22, 0, 0, 0, DateTimeKind.Unspecified), "DJ Stage", "Dj Huvudvärk" }
                 });
 
             migrationBuilder.InsertData(
@@ -125,8 +126,8 @@ namespace ConcertApp.Data.Migrations
                 columns: new[] { "ID", "Email", "Name", "PerformanceID", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "johndoe@example.com", "John's Rock Booking", 2, 1 },
-                    { 2, "janesmith@example.com", "Jane's Jazz Booking", 3, 2 }
+                    { 1, "johndoe@example.com", "John's Rock Booking", 2, 5 },
+                    { 2, "janesmith@example.com", "Jane's Jazz Booking", 3, 6 }
                 });
 
             migrationBuilder.CreateIndex(
