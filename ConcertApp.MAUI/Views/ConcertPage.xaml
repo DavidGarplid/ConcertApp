@@ -12,30 +12,19 @@
                FontAttributes="Bold" 
                 HorizontalOptions="Center" />
 
-        <CollectionView ItemsSource="{Binding Concert}" SelectionMode="Single" 
+        <CollectionView ItemsSource="{Binding Concerts}" SelectionMode="Single" 
                         SelectedItem="{Binding SelectedConcert, Mode=TwoWay}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="5">
                         <Grid>
-                            <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"/>
-                            <Label Text="{Binding Description}" FontSize="14" TextColor="Gray"/>
+                            <Button Text="{Binding Name}" FontSize="18" FontAttributes="Bold" Command="{Binding NavigateToPerformancesCommand}" CommandParameter="{Binding ID}"/>
+                            <Button Text="{Binding Description}" FontSize="14" TextColor="White" Command="{Binding NavigateToPerformancesCommand}" CommandParameter="{Binding ID}"/>
                         </Grid>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ConcertPage}}, Path=BindingContext.NavigateToPerformancesCommand}"
-                                                  CommandParameter="{Binding Id}" />
-                        </Frame.GestureRecognizers>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    Title="ConcertPage">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-
         <Button Text="Logout" Command="{Binding LogoutCommand}" />
     </VerticalStackLayout>
     

@@ -13,6 +13,10 @@
         ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage" />
 
+    <ShellContent
+        Title="Performance"
+        ContentTemplate="{DataTemplate views:PerformancePage}"
+        Route="PerformancePage" />
 
     <ShellContent
         Title="Concert"
