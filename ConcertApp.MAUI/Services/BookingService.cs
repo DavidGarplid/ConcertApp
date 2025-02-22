@@ -20,7 +20,7 @@ namespace ConcertApp.MAUI.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<Booking>> GetBookingsByUserIdAsync(int userID)
+        public async Task<List<Booking>> GetBookingsByUserIdAsync(int userID) //behöver denna fixas med Dto? osäker
         {
             Debug.WriteLine($"UserId: {userID}");
             var response = await _httpClient.GetAsync($"{_baseUrl}/user/{userID}");  // Endpoint for user-specific bookings

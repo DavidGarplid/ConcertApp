@@ -9,6 +9,9 @@ namespace ConcertApp.MAUI.Services
 {
     public interface IPerformanceService
     {
-
+        Task<List<Performance>> GetPerformancesByConcertIdAsync(int concertId);
+        Task<bool> CreateBookingAsync(int performanceId);
+        Task<bool> DeleteBookingAsync(int performanceId);
+        Task<bool> IsPerformanceBookedAsync(int performanceId);
     }
 }

@@ -12,11 +12,6 @@ namespace ConcertApp.MAUI.Services
 {
     public class UserService : IUserService
     {
-        //private readonly IRestService<User> _restService;
-        //public UserService(IRestService<User> restService)
-        //{
-        //    _restService = restService;
-        //}
         private readonly HttpClient _httpClient;
         private readonly string _baseUrl = "https://localhost:5001/api/user"; // Adjust URL if necessary
 
