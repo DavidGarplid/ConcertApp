@@ -12,11 +12,6 @@ namespace ConcertApp.MAUI.Services
 {
     public class UserService : IUserService
     {
-        //private readonly IRestService<User> _restService;
-        //public UserService(IRestService<User> restService)
-        //{
-        //    _restService = restService;
-        //}
         private readonly HttpClient _httpClient;
         private readonly string _baseUrl = "https://localhost:5001/api/user"; // Adjust URL if necessary
 
@@ -49,9 +44,11 @@ namespace ConcertApp.MAUI.Services
                     // Save UserDto data (Name and Email) into Preferences (not returning it)
                     Preferences.Set("UserName", userDto.Name);   // Save user Name
                     Preferences.Set("UserEmail", userDto.Email); // Save user Email
+                    Preferences.Set("UserID", (int)userDto.ID);
 
                     Debug.WriteLine($"UserName saved: {userDto.Name}");
                     Debug.WriteLine($"UserEmail saved: {userDto.Email}");
+                    Debug.WriteLine($"UserID saved: {userDto.ID}");
 
                     return "Login successful";
                 }

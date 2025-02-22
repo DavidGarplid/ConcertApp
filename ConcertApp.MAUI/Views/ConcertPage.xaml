@@ -11,8 +11,8 @@
                FontSize="24" 
                FontAttributes="Bold" 
                 HorizontalOptions="Center" />
-
-        <CollectionView ItemsSource="{Binding Concerts}" SelectionMode="Single" 
+        <Button Text="Logout" Command="{Binding LogoutCommand}" />
+        <CollectionView ItemsSource="{Binding Concert}" SelectionMode="Single" 
                         SelectedItem="{Binding SelectedConcert, Mode=TwoWay}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -25,9 +25,9 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="Logout" Command="{Binding LogoutCommand}" />
-    </VerticalStackLayout>
-    
-    
-    
+      </VerticalStackLayout>
+
+
+
+
 </ContentPage>

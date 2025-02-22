@@ -9,5 +9,6 @@ namespace ConcertApp.MAUI.Services
 {
     public interface IBookingService 
     {
+        Task<List<Booking>> GetBookingsByUserIdAsync(int userID);
     }
 }

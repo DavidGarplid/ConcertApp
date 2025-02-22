@@ -13,5 +13,6 @@ namespace ConcertApp.MAUI.Models
         public DateTime Date { get; set; }
         public string Location { get; set; } = null!;
         public int ConcertId { get; set; }
+        public bool IsBooked { get; set; }
     }
 }

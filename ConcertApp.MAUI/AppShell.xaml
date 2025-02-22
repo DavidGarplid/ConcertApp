@@ -31,11 +31,12 @@
                 Route="ConcertPage" />
         </Tab>
 
-        <Tab Title="Bookings" Icon="booking.png">
+        <Tab Title="Bookings">
             <ShellContent
                 Title="Bookings"
                 ContentTemplate="{DataTemplate views:BookingPage}"
                 Route="BookingPage" />
+            
         </Tab>
     </TabBar>
 
