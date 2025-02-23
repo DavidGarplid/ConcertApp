@@ -1,5 +1,6 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ConcertApp.MAUI.Models;
 using ConcertApp.MAUI.Services;
 using System;
@@ -16,7 +17,6 @@ namespace ConcertApp.MAUI.ViewModels
     public partial class BookingViewModel 
     {
         private readonly IBookingService _bookingService;
-        private readonly IPerformanceService _performanceService;
 
         [ObservableProperty]
         private ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();  // Use Booking model
@@ -24,7 +24,6 @@ namespace ConcertApp.MAUI.ViewModels
         public BookingViewModel(IBookingService bookingService, IPerformanceService performanceService)
         {
             _bookingService = bookingService;
-            _performanceService = performanceService;
             LoadBookingsAsync();
         }
 
@@ -45,7 +44,6 @@ namespace ConcertApp.MAUI.ViewModels
                     var bookingsList = await _bookingService.GetBookingsByUserIdAsync(userID);
                     Debug.WriteLine($"Fetched bookings: {bookingsList.Count}");
                     bookings.Clear();
-
                     foreach (var booking in bookingsList)
                     {                       
                         Debug.WriteLine($"Booking: {booking.Name}, {booking.Email}");
@@ -57,6 +55,33 @@ namespace ConcertApp.MAUI.ViewModels
             {
                 Debug.WriteLine($"Error loading bookings: {ex.Message}");
                 // Optionally, show a message to the user if something goes wrong
+            }
+        }
+
+        [RelayCommand]
+        private async Task DeleteBooking(int bookingId)
+        {
+            Debug.WriteLine($"DeleteBookingCommand triggered for Booking ID: {bookingId}");
+
+            bool isConfirmed = await Shell.Current.DisplayAlert("Confirm", "Are you sure you want to delete this booking?", "Yes", "No");
+
+            if (!isConfirmed)
+                return;
+
+            bool success = await _bookingService.DeleteBookingAsync(bookingId);
+            if (success)
+            {
+                var bookingToRemove = Bookings.FirstOrDefault(b => b.ID == bookingId);
+                if (bookingToRemove != null)
+                {
+                    Bookings.Remove(bookingToRemove);
+                }
+
+                await Shell.Current.DisplayAlert("Success", "Booking deleted.", "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Failed to delete booking.", "OK");
             }
         }
 

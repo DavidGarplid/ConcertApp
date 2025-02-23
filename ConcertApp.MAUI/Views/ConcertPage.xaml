@@ -18,14 +18,18 @@
         <CollectionView ItemsSource="{Binding Concerts}" SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Concert">
-                    <Frame Padding="10" Margin="5">
-                        <Grid>
-                            <Label Text="{Binding Title}" FontSize="18" FontAttributes="Bold"/>
+                    <Frame Padding="10" Margin="10" CornerRadius="5">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Text="{Binding Title}" FontSize="18" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center"/>
+                            
                             <Button Text="Check Performances"
-                                    FontSize="18"
+                                    FontSize="14"
                                     FontAttributes="Bold"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToPerformancesCommand}"
-                                    CommandParameter="{Binding .}" />
+                                    CommandParameter="{Binding .}" 
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Padding="10, 5"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>

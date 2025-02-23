@@ -20,4 +20,16 @@ public class PerformanceController : ControllerBase
     {
         return Ok(_mapper.Map<IEnumerable<PerformanceDto>>(await _unitOfWork.Performances.All()));
     }
+
+    [HttpGet("byconcert/{concertId}")]
+    public async Task<IActionResult> GetPerformances(int concertId)
+    {
+        var performances = await _unitOfWork.Performances.Find(p => p.ConcertId == concertId);
+        if (performances == null)
+        {
+            return NotFound();
+        }
+        return Ok(_mapper.Map<IEnumerable<PerformanceDto>>(performances));
+    }
+
 }

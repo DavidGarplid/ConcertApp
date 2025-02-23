@@ -22,7 +22,7 @@ namespace ConcertApp.MAUI.Services
 
         public async Task<List<Performance>> GetPerformancesByConcertIdAsync(int concertId)
         {
-            var response = await _httpClient.GetAsync($"{_baseUrl}?concertId={concertId}");
+            var response = await _httpClient.GetAsync($"{_baseUrl}/byconcert/{concertId}");
             if (!response.IsSuccessStatusCode) return new List<Performance>();
 
             string content = await response.Content.ReadAsStringAsync();
