@@ -50,6 +50,7 @@ public class BookingController : ControllerBase
 
         if (existingBooking != null)
         {
+            // If booking exists, return a message without trying to create another
             return Ok(new { IsBooked = true, Message = "Booking already exists." });
         }
 
@@ -64,16 +65,21 @@ public class BookingController : ControllerBase
     [HttpDelete("delete")]
     public async Task<IActionResult> DeleteBooking(int performanceId, int userId)
     {
-        var booking = await _unitOfWork.Bookings.All()
-            .ContinueWith(t => t.Result.FirstOrDefault(b => b.PerformanceID == performanceId && b.UserId == userId));
+        var booking = await _unitOfWork.Bookings.Find(b => b.PerformanceID == performanceId && b.UserId == userId);
 
-        if (booking == null)
+        if (booking == null || !booking.Any()) // ✅ Ensure booking exists
         {
             return NotFound("Booking not found.");
         }
 
-        _unitOfWork.Bookings.Delete(booking);
-        await _unitOfWork.Complete();
+        _unitOfWork.Bookings.Delete(booking.First()); // ✅ Delete only the first matching booking
+
+        bool success = await _unitOfWork.Complete() > 0; // ✅ Ensure deletion was committed
+
+        if (!success)
+        {
+            return StatusCode(500, "Failed to delete booking.");
+        }
 
         return Ok("Booking deleted successfully.");
     }

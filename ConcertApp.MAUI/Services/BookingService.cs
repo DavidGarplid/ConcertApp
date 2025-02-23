@@ -22,8 +22,9 @@ namespace ConcertApp.MAUI.Services
 
         public async Task<bool> DeleteBookingAsync(int bookingId)
         {
-            var apiUrl = $"https://your-api-url.com/api/booking/{bookingId}";
+            var apiUrl = $"{_baseUrl}/delete/{bookingId}"; // Adjust the URL to match the controller route
             var response = await _httpClient.DeleteAsync(apiUrl);
+
             return response.IsSuccessStatusCode;
         }
 

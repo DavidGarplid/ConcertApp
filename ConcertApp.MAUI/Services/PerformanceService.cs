@@ -29,19 +29,26 @@ namespace ConcertApp.MAUI.Services
             return JsonSerializer.Deserialize<List<Performance>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
-        public async Task<bool> IsPerformanceBookedAsync(int performanceId)
+        public async Task<bool> IsPerformanceBookedAsync(int performanceId, int userId)
         {
             try
             {
-                int userId = Preferences.Get("UserID", 0);
-                if (userId == 0) return false;
-
                 var response = await _httpClient.GetAsync($"{_baseUrl2}/isBooked?performanceId={performanceId}&userId={userId}");
-                if (!response.IsSuccessStatusCode) return false;
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Error: Response not successful.");
+                    return false;
+                }
 
                 string content = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Response content: {content}");  // Log the raw response content for debugging
                 var result = JsonSerializer.Deserialize<Dictionary<string, bool>>(content);
-                return result != null && result.ContainsKey("IsBooked") && result["IsBooked"];
+
+                // Log the deserialized dictionary to confirm correct values
+                Console.WriteLine($"Deserialized result: {result}");
+
+                // Check if 'IsBooked' key exists and return its value
+                return result != null && result.ContainsKey("isBooked") && result["isBooked"];
             }
             catch (Exception ex)
             {
@@ -85,26 +92,7 @@ namespace ConcertApp.MAUI.Services
             }
         }
 
-        public async Task<bool> DeleteBookingAsync(int performanceId)
-        {
-            try
-            {
-                int userId = Preferences.Get("UserID", 0);
-                if (userId == 0)
-                {
-                    throw new Exception("User ID not found. Please log in again.");
-                }
-
-                var response = await _httpClient.DeleteAsync($"{_baseUrl2}/delete?performanceId={performanceId}&userId={userId}");
-
-                return response.IsSuccessStatusCode;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error deleting booking: {ex.Message}");
-                return false;
-            }
-        }
+        
 
 
 

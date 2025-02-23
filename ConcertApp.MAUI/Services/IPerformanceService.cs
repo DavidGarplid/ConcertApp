@@ -11,7 +11,7 @@ namespace ConcertApp.MAUI.Services
     {
         Task<List<Performance>> GetPerformancesByConcertIdAsync(int concertId);
         Task<bool> CreateBookingAsync(int performanceId);
-        Task<bool> DeleteBookingAsync(int performanceId);
-        Task<bool> IsPerformanceBookedAsync(int performanceId);
+        
+        Task<bool> IsPerformanceBookedAsync(int performanceId, int userId);
     }
 }
