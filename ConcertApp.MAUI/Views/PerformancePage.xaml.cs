@@ -15,11 +15,5 @@ public partial class PerformancePage : ContentPage
         _viewModel = viewModel;
     }
 
-    private async void OnBookingToggled(object sender, ToggledEventArgs e)
-    {
-        if (sender is Switch switchControl && switchControl.BindingContext is Performance performance)
-        {
-            await _viewModel.ToggleBooking(performance.ID, e.Value);
-        }
-    }
+    
 }

@@ -36,7 +36,7 @@ namespace ConcertApp.MAUI.Services
                 int userId = Preferences.Get("UserID", 0);
                 if (userId == 0) return false;
 
-                var response = await _httpClient.GetAsync($"{_baseUrl}/isBooked?performanceId={performanceId}&userId={userId}");
+                var response = await _httpClient.GetAsync($"{_baseUrl2}/isBooked?performanceId={performanceId}&userId={userId}");
                 if (!response.IsSuccessStatusCode) return false;
 
                 string content = await response.Content.ReadAsStringAsync();

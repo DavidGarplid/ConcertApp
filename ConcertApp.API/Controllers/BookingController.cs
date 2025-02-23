@@ -50,7 +50,7 @@ public class BookingController : ControllerBase
 
         if (existingBooking != null)
         {
-            return Conflict("Booking already exists.");
+            return Ok(new { IsBooked = true, Message = "Booking already exists." });
         }
 
         var booking = _mapper.Map<Booking>(bookingDto); // Use AutoMapper

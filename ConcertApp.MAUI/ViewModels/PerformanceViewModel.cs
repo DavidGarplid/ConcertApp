@@ -44,35 +44,49 @@ namespace ConcertApp.MAUI.ViewModels
 
 
 
-        //[RelayCommand]
-        public async Task ToggleBooking(int performanceId, bool isToggled)
+        [RelayCommand]
+        public async Task ToggleBooking(int performanceId)
         {
-            if (isToggled)
+            var performance = Performances.FirstOrDefault(p => p.ID == performanceId);
+            if (performance == null)
             {
-                bool success = await _performanceService.CreateBookingAsync(performanceId);
+                Debug.WriteLine("Performance not found.");
+                return;
+            }
+
+            Debug.WriteLine($"Toggling booking for Performance ID: {performanceId}");
+
+            // Check if already booked
+            Debug.WriteLine($"Current booking status: {performance.IsBooked}");
+            var isBooked = await _performanceService.IsPerformanceBookedAsync(performanceId);
+            Debug.WriteLine($"After backend call - isBooked: {isBooked}");
+            // Update the performance model's IsBooked property based on the response
+            performance.IsBooked = isBooked;
+
+            // Log the status to verify the correct value after checking with the backend
+            Debug.WriteLine($"Is the performance booked? {isBooked}");
+
+            if (isBooked)
+            {
+                performance.Message = "This performance is already booked!";
+                Debug.WriteLine("Booking already exists.");
+                await Shell.Current.DisplayAlert("Error", "Booking already exists.", "OK");
+                return; // Stop further execution if already booked
+            }
+            else
+            {
+                var success = await _performanceService.CreateBookingAsync(performanceId);
                 if (success)
                 {
-                    Debug.WriteLine("Booking created successfully!");
+                    performance.IsBooked = true; // Make sure we update this after successful creation
+                    performance.Message = "Booking created successfully!";
+                    Debug.WriteLine("Booking created successfully.");
                     await Shell.Current.DisplayAlert("Success", "Booking created!", "OK");
                 }
                 else
                 {
                     Debug.WriteLine("Failed to create booking.");
                     await Shell.Current.DisplayAlert("Error", "Failed to create booking.", "OK");
-                }
-            }
-            else
-            {
-                bool success = await _performanceService.DeleteBookingAsync(performanceId);
-                if (success)
-                {
-                    Debug.WriteLine("Booking deleted successfully!");
-                    await Shell.Current.DisplayAlert("Success", "Booking deleted!", "OK");
-                }
-                else
-                {
-                    Debug.WriteLine("Failed to delete booking.");
-                    await Shell.Current.DisplayAlert("Error", "Failed to delete booking.", "OK");
                 }
             }
         }
