@@ -26,13 +26,20 @@ namespace ConcertApp.MAUI.ViewModels
         {
             _performanceService = performanceService;
             Performances = new ObservableCollection<Performance>();
-            
 
+
+        }
+
+        partial void OnConcertIdChanged(int value)
+        {
             LoadPerformances();
         }
 
+
         private async void LoadPerformances()
         {
+            if (ConcertId == 0) return;
+
             var performances = await _performanceService.GetPerformancesByConcertIdAsync(ConcertId);
             foreach (var performance in performances)
             {

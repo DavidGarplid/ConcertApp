@@ -20,11 +20,22 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="10" BorderColor="LightGray" CornerRadius="5">
-                        <StackLayout>
-                            <Label Text="{Binding Name}" FontSize="18" />
-                            <Label Text="{Binding Email}" FontSize="14" TextColor="Gray" />
-                            <Label Text="{Binding PerformanceID, StringFormat='Performance ID: {0}'}" FontSize="14" TextColor="Gray" />
-                        </StackLayout>
+                        <Grid ColumnDefinitions="*, Auto">
+                            <StackLayout Grid.Column="0">
+                                <Label Text="{Binding Name}" FontSize="18" />
+                                <Label Text="{Binding Email}" FontSize="14" TextColor="Gray" />
+                                <Label Text="{Binding PerformanceID, StringFormat='Performance ID: {0}'}" FontSize="14" TextColor="Gray" />
+
+                            </StackLayout>
+                            <Button Text="Cancel Booking"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteBookingCommand}"
+                                    CommandParameter="{Binding ID}"
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Padding="10, 5"/>
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

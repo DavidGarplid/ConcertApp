@@ -20,6 +20,13 @@ namespace ConcertApp.MAUI.Services
             _httpClient = httpClient;
         }
 
+        public async Task<bool> DeleteBookingAsync(int bookingId)
+        {
+            var apiUrl = $"https://your-api-url.com/api/booking/{bookingId}";
+            var response = await _httpClient.DeleteAsync(apiUrl);
+            return response.IsSuccessStatusCode;
+        }
+
         public async Task<List<Booking>> GetBookingsByUserIdAsync(int userID) //behöver denna fixas med Dto? osäker
         {
             Debug.WriteLine($"UserId: {userID}");

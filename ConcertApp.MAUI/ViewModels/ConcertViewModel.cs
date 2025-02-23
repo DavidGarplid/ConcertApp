@@ -50,10 +50,7 @@ namespace ConcertApp.MAUI.ViewModels
         private async Task NavigateToPerformances(Concert concert)
         {
             Debug.WriteLine("Pressed");
-            await Shell.Current.GoToAsync($"PerformancePage", new Dictionary<string, object>
-            {
-                { "concertId", concert.ID }
-            });
+            await Shell.Current.GoToAsync($"PerformancePage?concertId={concert.ID}");
         }
     }
 }
