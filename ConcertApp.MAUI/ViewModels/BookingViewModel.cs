@@ -16,13 +16,15 @@ namespace ConcertApp.MAUI.ViewModels
     public partial class BookingViewModel 
     {
         private readonly IBookingService _bookingService;
+        private readonly IPerformanceService _performanceService;
 
         [ObservableProperty]
         private ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();  // Use Booking model
 
-        public BookingViewModel(IBookingService bookingService)
+        public BookingViewModel(IBookingService bookingService, IPerformanceService performanceService)
         {
             _bookingService = bookingService;
+            _performanceService = performanceService;
             LoadBookingsAsync();
         }
 
@@ -45,7 +47,7 @@ namespace ConcertApp.MAUI.ViewModels
                     bookings.Clear();
 
                     foreach (var booking in bookingsList)
-                    {
+                    {                       
                         Debug.WriteLine($"Booking: {booking.Name}, {booking.Email}");
                         bookings.Add(booking);
                     }
