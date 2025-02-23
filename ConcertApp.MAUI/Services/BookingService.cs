@@ -13,7 +13,7 @@ namespace ConcertApp.MAUI.Services
     public class BookingService : IBookingService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "https://localhost:5001/api/booking"; // Adjust the URL
+        private readonly string _baseUrl = "https://localhost:5001/api/booking"; 
 
         public BookingService(HttpClient httpClient)
         {
@@ -22,24 +22,22 @@ namespace ConcertApp.MAUI.Services
 
         public async Task<bool> DeleteBookingAsync(int bookingId)
         {
-            var apiUrl = $"{_baseUrl}/delete/{bookingId}"; // Adjust the URL to match the controller route
+            var apiUrl = $"{_baseUrl}/delete/{bookingId}"; 
             var response = await _httpClient.DeleteAsync(apiUrl);
 
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<List<Booking>> GetBookingsByUserIdAsync(int userID) //behöver denna fixas med Dto? osäker
+        public async Task<List<Booking>> GetBookingsByUserIdAsync(int userID) 
         {
             Debug.WriteLine($"UserId: {userID}");
-            var response = await _httpClient.GetAsync($"{_baseUrl}/user/{userID}");  // Endpoint for user-specific bookings
+            var response = await _httpClient.GetAsync($"{_baseUrl}/user/{userID}");  
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Failed to fetch bookings");
             }
 
             var content = await response.Content.ReadAsStringAsync();
-            
-            Debug.WriteLine($"API response content: {content}");
 
             return JsonSerializer.Deserialize<List<Booking>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }

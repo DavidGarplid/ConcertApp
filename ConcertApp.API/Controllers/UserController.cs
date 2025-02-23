@@ -83,16 +83,13 @@ public class UserController : ControllerBase
         {
             return Unauthorized(ErrorCode.InvalidCredentials.ToString()); // Invalid email or password
         }
-        Debug.WriteLine($"User before mapping: Name={user.name}, Email={user.email}");
+    
         // Map user to UserDto
         var userDto = _mapper.Map<UserDto>(user);
 
-        // Log the data before returning
-        Debug.WriteLine($"Returning UserDto: Name={userDto.Name}, Email={userDto.Email}");
 
-
-        // If login is successful, return the user info
+       
         return Ok(userDto);
-        //return Ok(_mapper.Map<UserDto>(user));
+        
     }
 }

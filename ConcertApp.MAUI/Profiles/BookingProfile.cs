@@ -13,23 +13,21 @@ namespace ConcertApp.MAUI.Profiles
     {
         public BookingProfile()
         {
-            // Map Model to DTO
-            // Note that "dest.Name" gets its value from "src.TaskName"
+            
             CreateMap<Booking, Booking>()
                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.UserID, opt => opt.MapFrom(src => src.UserID))
                 .ForMember(dest => dest.PerformanceID, opt => opt.MapFrom(src => src.PerformanceID));
-            // Map DTO to Model
-            // Note that "dest.TaskName" gets its value from "src.Name"
+            
             CreateMap<BookingDto, Booking>()
                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.UserID, opt => opt.MapFrom(src => src.UserID))
                 .ForMember(dest => dest.PerformanceID, opt => opt.MapFrom(src => src.PerformanceID));
-            // CreateMap<Booking, Booking>().ReverseMap();
+            
         }
     }
 }

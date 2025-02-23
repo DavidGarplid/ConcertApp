@@ -36,19 +36,17 @@ namespace ConcertApp.MAUI.Services
                 {
                     var options = new JsonSerializerOptions
                     {
-                        PropertyNameCaseInsensitive = true  // Enable case-insensitive property mapping
+                        PropertyNameCaseInsensitive = true 
                     };
 
                     var userDto = JsonSerializer.Deserialize<UserDto>(responseContent, options);
-                    Debug.WriteLine($"Received UserDto: Name={userDto.Name}, Email={userDto.Email}");
-                    // Save UserDto data (Name and Email) into Preferences (not returning it)
-                    Preferences.Set("UserName", userDto.Name);   // Save user Name
-                    Preferences.Set("UserEmail", userDto.Email); // Save user Email
+                    
+                 
+                    Preferences.Set("UserName", userDto.Name);   
+                    Preferences.Set("UserEmail", userDto.Email); 
                     Preferences.Set("UserID", (int)userDto.ID);
 
-                    Debug.WriteLine($"UserName saved: {userDto.Name}");
-                    Debug.WriteLine($"UserEmail saved: {userDto.Email}");
-                    Debug.WriteLine($"UserID saved: {userDto.ID}");
+                    
 
                     return "Login successful";
                 }
