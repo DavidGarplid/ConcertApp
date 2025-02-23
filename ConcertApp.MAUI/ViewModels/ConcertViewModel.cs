@@ -34,7 +34,6 @@ namespace ConcertApp.MAUI.ViewModels
         {
             _concertService = new ConcertService();
             Concerts = new ObservableCollection<Concert>();
-            Debug.WriteLine($"NavigateToPerformancesCommand is null: {NavigateToPerformancesCommand == null}");
             LoadConcerts();
         }
 

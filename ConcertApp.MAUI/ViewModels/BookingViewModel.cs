@@ -36,17 +36,14 @@ namespace ConcertApp.MAUI.ViewModels
             {
                 Debug.WriteLine("Loading bookings...");
                 var userData = GetUserData();
-                Debug.WriteLine($"xxxxxxxxxxxxxx Retrieved User ID: {userData.userID}");
                 var userID = userData.userID;
 
                 if (userID != 0)
                 {
                     var bookingsList = await _bookingService.GetBookingsByUserIdAsync(userID);
-                    Debug.WriteLine($"Fetched bookings: {bookingsList.Count}");
                     bookings.Clear();
                     foreach (var booking in bookingsList)
                     {                       
-                        Debug.WriteLine($"Booking: {booking.Name}, {booking.Email}");
                         bookings.Add(booking);
                     }
                 }
@@ -61,9 +58,8 @@ namespace ConcertApp.MAUI.ViewModels
         [RelayCommand]
         private async Task DeleteBooking(int bookingId)
         {
-            Debug.WriteLine($"DeleteBookingCommand triggered for Booking ID: {bookingId}");
 
-            // Confirm with the user before deleting
+
             bool isConfirmed = await Shell.Current.DisplayAlert("Confirm", "Are you sure you want to delete this booking?", "Yes", "No");
 
             if (!isConfirmed)
