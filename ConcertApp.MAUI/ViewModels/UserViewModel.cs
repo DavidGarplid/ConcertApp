@@ -40,9 +40,7 @@ public partial class UserViewModel
         {
             var (userName, userEmail, userID) = GetUserData();
 
-            await Shell.Current.DisplayAlert("User Info", $"Name: {userName}\nEmail: {userEmail}", "OK");
-
-            await Shell.Current.DisplayAlert("Success", "Login successful", "OK");
+            
             await Shell.Current.GoToAsync("//MainTabBar");
 
 

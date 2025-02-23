@@ -3,35 +3,51 @@
     x:Class="ConcertApp.MAUI.Views.PerformancePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewmodels="clr-namespace:ConcertApp.MAUI.ViewModels"
     xmlns:local="clr-namespace:ConcertApp.MAUI.Views"
+    xmlns:viewmodels="clr-namespace:ConcertApp.MAUI.ViewModels"
     Title="Concert Performances">
 
     <VerticalStackLayout Padding="20">
-        <Label Text="Performances for this Concert" 
-               FontSize="24" 
-               FontAttributes="Bold" 
-               HorizontalOptions="Center" />
+        <Label
+            FontAttributes="Bold"
+            FontSize="24"
+            HorizontalOptions="Center"
+            Text="Performances for this Concert" />
 
         <CollectionView ItemsSource="{Binding Performances}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5">
+                    <Frame Margin="5" Padding="10">
                         <StackLayout>
-                            <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"/>
-                            <Label Text="{Binding DateTime}" FontSize="14" TextColor="Gray"/>
-                            <Label Text="{Binding Location}" FontSize="14" TextColor="Gray"/>
-                            <Label Text="{Binding ID}" FontSize="14" TextColor="Gray"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="{Binding Name}" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding DateTime}"
+                                TextColor="Gray" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding Location}"
+                                TextColor="Gray" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding ID}"
+                                TextColor="Gray" />
 
 
-                            <Button Text="Create Booking" 
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ToggleBookingCommand}"
-                                    CommandParameter="{Binding ID}"
-                                     
-                                     />
+                            <Button
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ToggleBookingCommand}"
+                                CommandParameter="{Binding ID}"
+                                Text="Create Booking" />
 
 
-                            <Label Text="{Binding Message}" FontSize="14" TextColor="Red" IsVisible="{Binding IsBooked}"/>
+                            <Label
+                                FontSize="14"
+                                IsVisible="{Binding IsBooked}"
+                                Text="{Binding Message}"
+                                TextColor="Red" />
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

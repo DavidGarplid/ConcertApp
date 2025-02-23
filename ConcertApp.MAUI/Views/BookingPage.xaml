@@ -1,40 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ConcertApp.MAUI"
-             x:Class="ConcertApp.MAUI.Views.BookingPage"
-             Title="Bookings">
+<ContentPage
+    x:Class="ConcertApp.MAUI.Views.BookingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ConcertApp.MAUI"
+    Title="Bookings">
 
-    
+
 
     <StackLayout>
 
-        <Label Text="Your Bookings"
-               FontSize="24"
-               HorizontalOptions="Center"
-               Padding="20" />
-        
+        <Label
+            Padding="20"
+            FontSize="24"
+            HorizontalOptions="Center"
+            Text="Your Bookings" />
+
 
 
         <CollectionView ItemsSource="{Binding Bookings}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="10" BorderColor="LightGray" CornerRadius="5">
+                    <Frame
+                        Margin="10"
+                        Padding="10"
+                        BorderColor="LightGray"
+                        CornerRadius="5">
                         <Grid ColumnDefinitions="*, Auto">
                             <StackLayout Grid.Column="0">
-                                <Label Text="{Binding Name}" FontSize="18" />
-                                <Label Text="{Binding Email}" FontSize="14" TextColor="Gray" />
-                                <Label Text="{Binding PerformanceID, StringFormat='Performance ID: {0}'}" FontSize="14" TextColor="Gray" />
+                                <Label FontSize="18" Text="{Binding Name}" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Email}"
+                                    TextColor="Gray" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding PerformanceID, StringFormat='Performance ID: {0}'}"
+                                    TextColor="Gray" />
 
                             </StackLayout>
-                            <Button Text="Cancel Booking"
-                                    FontSize="14"
-                                    FontAttributes="Bold"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteBookingCommand}"
-                                    CommandParameter="{Binding ID}"
-                                    Grid.Column="1"
-                                    VerticalOptions="Center"
-                                    Padding="10, 5"/>   
+                            <Button
+                                Grid.Column="1"
+                                Padding="10,5"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteBookingCommand}"
+                                CommandParameter="{Binding ID}"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="Cancel Booking"
+                                VerticalOptions="Center" />
                         </Grid>
                     </Frame>
                 </DataTemplate>
