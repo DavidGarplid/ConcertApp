@@ -11,5 +11,11 @@ public partial class BookingPage : ContentPage
 		BindingContext = viewModel;
         
     }
-    
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        var viewModel = (BookingViewModel)BindingContext;
+        await viewModel.LoadBookingsAsync();  // Trigger loading of bookings when the page appears
+    }
+
 }
