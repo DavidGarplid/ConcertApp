@@ -11,7 +11,7 @@ namespace ConcertApp.MAUI.Services
     public class ConcertService : IConcertService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "https://localhost:5001/api/concerts";
+        private readonly string _baseUrl = "https://localhost:5001/api/concert";
 
         public ConcertService()
         {

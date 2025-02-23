@@ -3,23 +3,29 @@
     x:Class="ConcertApp.MAUI.Views.ConcertPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:ConcertApp.MAUI.Models"
+    xmlns:viewmodels="clr-namespace:ConcertApp.MAUI.ViewModels"
     xmlns:local="clr-namespace:ConcertApp.MAUI.Views"
+    x:DataType="viewmodels:ConcertViewModel"
     Title="Available Concerts">
 
-    <VerticalStackLayout Padding="20">
+<VerticalStackLayout Padding="20">
         <Label Text="Select a Concert" 
                FontSize="24" 
                FontAttributes="Bold" 
                 HorizontalOptions="Center" />
         <Button Text="Logout" Command="{Binding LogoutCommand}" />
-        <CollectionView ItemsSource="{Binding Concert}" SelectionMode="Single" 
-                        SelectedItem="{Binding SelectedConcert, Mode=TwoWay}">
+        <CollectionView ItemsSource="{Binding Concerts}" SelectionMode="Single">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:Concert">
                     <Frame Padding="10" Margin="5">
                         <Grid>
-                            <Button Text="{Binding Name}" FontSize="18" FontAttributes="Bold" Command="{Binding NavigateToPerformancesCommand}" CommandParameter="{Binding ID}"/>
-                            <Button Text="{Binding Description}" FontSize="14" TextColor="White" Command="{Binding NavigateToPerformancesCommand}" CommandParameter="{Binding ID}"/>
+                            <Label Text="{Binding Title}" FontSize="18" FontAttributes="Bold"/>
+                            <Button Text="Check Performances"
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToPerformancesCommand}"
+                                    CommandParameter="{Binding .}" />
                         </Grid>
                     </Frame>
                 </DataTemplate>

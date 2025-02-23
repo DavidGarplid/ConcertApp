@@ -5,6 +5,7 @@ using ConcertApp.MAUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,13 +26,15 @@ namespace ConcertApp.MAUI.ViewModels
             await Shell.Current.GoToAsync("//LoginPage"); 
         }
         private readonly ConcertService _concertService;
+        
+        
         public ObservableCollection<Concert> Concerts { get; set; }
 
         public ConcertViewModel()
         {
             _concertService = new ConcertService();
             Concerts = new ObservableCollection<Concert>();
-
+            Debug.WriteLine($"NavigateToPerformancesCommand is null: {NavigateToPerformancesCommand == null}");
             LoadConcerts();
         }
 
@@ -44,9 +47,13 @@ namespace ConcertApp.MAUI.ViewModels
             }
         }
         [RelayCommand]
-        private async Task NavigateToPerformances(int concertId)
+        private async Task NavigateToPerformances(Concert concert)
         {
-            await Shell.Current.GoToAsync("//PerformancePage");
+            Debug.WriteLine("Pressed");
+            await Shell.Current.GoToAsync($"PerformancePage", new Dictionary<string, object>
+            {
+                { "concertId", concert.ID }
+            });
         }
     }
 }

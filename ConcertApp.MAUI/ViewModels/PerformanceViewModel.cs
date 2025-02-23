@@ -13,21 +13,27 @@ using System.Threading.Tasks;
 namespace ConcertApp.MAUI.ViewModels
 {
     //[ObservableObject]
+    [QueryProperty(nameof(ConcertId), "concertId")]
     public partial class PerformanceViewModel : ObservableObject
     {
         private readonly IPerformanceService _performanceService;
         public ObservableCollection<Performance> Performances { get; set; }
 
-        public PerformanceViewModel(int concertId, IPerformanceService performanceService)
+        [ObservableProperty]
+        private int concertId;
+
+        public PerformanceViewModel(IPerformanceService performanceService)
         {
             _performanceService = performanceService;
             Performances = new ObservableCollection<Performance>();
-            LoadPerformances(concertId);
+            
+
+            LoadPerformances();
         }
 
-        private async void LoadPerformances(int concertId)
+        private async void LoadPerformances()
         {
-            var performances = await _performanceService.GetPerformancesByConcertIdAsync(concertId);
+            var performances = await _performanceService.GetPerformancesByConcertIdAsync(ConcertId);
             foreach (var performance in performances)
             {
                 bool isBooked = await _performanceService.IsPerformanceBookedAsync(performance.ID);
@@ -35,6 +41,8 @@ namespace ConcertApp.MAUI.ViewModels
                 Performances.Add(performance);
             }
         }
+
+
 
         //[RelayCommand]
         public async Task ToggleBooking(int performanceId, bool isToggled)

@@ -12,8 +12,8 @@ namespace ConcertApp.MAUI.Services
     public class PerformanceService : IPerformanceService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "https://localhost:5001/api/performances";
-        private readonly string _baseUrl2 = "https://localhost:5001/api/bookings";
+        private readonly string _baseUrl = "https://localhost:5001/api/performance";
+        private readonly string _baseUrl2 = "https://localhost:5001/api/booking";
 
         public PerformanceService()
         {
