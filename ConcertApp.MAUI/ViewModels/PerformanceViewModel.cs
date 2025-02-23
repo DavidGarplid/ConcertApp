@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace ConcertApp.MAUI.ViewModels
 {
-    //[ObservableObject]
     [QueryProperty(nameof(ConcertId), "concertId")]
     public partial class PerformanceViewModel : ObservableObject
     {
@@ -41,7 +40,7 @@ namespace ConcertApp.MAUI.ViewModels
             if (ConcertId == 0) return;
 
             var performances = await _performanceService.GetPerformancesByConcertIdAsync(ConcertId);
-            int userId = Preferences.Get("UserID", 0);  // Get the logged-in user ID
+            int userId = Preferences.Get("UserID", 0);
             foreach (var performance in performances)
             {
                 
@@ -61,39 +60,29 @@ namespace ConcertApp.MAUI.ViewModels
                 return;
             }
 
-            Debug.WriteLine($"Toggling booking for Performance ID: {performanceId}");
-
-            // Get the logged-in user ID
             int userId = Preferences.Get("UserID", 0);
 
-            // Check if already booked
-            var isBooked = await _performanceService.IsPerformanceBookedAsync(performanceId, userId); // Pass userId as well
-            Debug.WriteLine($"Booking status after backend check: {isBooked}");
-
-            // Update the IsBooked status on the model (from backend)
+            var isBooked = await _performanceService.IsPerformanceBookedAsync(performanceId, userId);
             performance.IsBooked = isBooked;
 
             if (isBooked)
             {
                 performance.Message = "This performance is already booked!";
-                Debug.WriteLine("Booking already exists.");
                 await Shell.Current.DisplayAlert("Error", "Booking already exists.", "OK");
-                return; // Stop further execution if already booked
+                return; 
             }
             else
             {
                 var success = await _performanceService.CreateBookingAsync(performanceId);
                 if (success)
                 {
-                    performance.IsBooked = true;  // Ensure the local state is updated after backend creation
+                    performance.IsBooked = true;
                     performance.Message = "Booking created successfully!";
-                    Debug.WriteLine("Booking created successfully.");
                     await Shell.Current.DisplayAlert("Success", "Booking created!", "OK");
                 }
                 else
                 {
-                    performance.IsBooked = false;  // Ensure the local state is updated in case of failure
-                    Debug.WriteLine("Failed to create booking.");
+                    performance.IsBooked = false;
                     await Shell.Current.DisplayAlert("Error", "Failed to create booking.", "OK");
                 }
             }

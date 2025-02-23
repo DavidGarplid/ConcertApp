@@ -9,6 +9,5 @@ public partial class ConcertPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-        Debug.WriteLine($"BindingContext: {BindingContext?.GetType().Name}");
     }
 }

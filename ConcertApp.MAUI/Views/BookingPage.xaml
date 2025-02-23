@@ -8,14 +8,14 @@
     
 
     <StackLayout>
-         <!--Title for the bookings section--> 
+
         <Label Text="Your Bookings"
                FontSize="24"
                HorizontalOptions="Center"
                Padding="20" />
         
 
-         <!--CollectionView to display the list of bookings--> 
+
         <CollectionView ItemsSource="{Binding Bookings}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

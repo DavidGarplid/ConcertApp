@@ -36,7 +36,7 @@ public static class MauiProgram
 
         
         builder.Services.AddSingleton<HttpClient>();
-        //builder.Services.AddScoped<HttpClient>();
+
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddSingleton<IRestService<User>, RestService<User>>();
         builder.Services.AddScoped<IConcertService, ConcertService>();
