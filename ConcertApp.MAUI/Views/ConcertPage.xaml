@@ -14,7 +14,7 @@
                FontSize="24" 
                FontAttributes="Bold" 
                 HorizontalOptions="Center" />
-        <Button Text="Logout" Command="{Binding LogoutCommand}" />
+        
         <CollectionView ItemsSource="{Binding Concerts}" SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Concert">
@@ -35,7 +35,8 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-      </VerticalStackLayout>
+        <Button Text="Logout" Command="{Binding LogoutCommand}" />
+    </VerticalStackLayout>
 
 
 
