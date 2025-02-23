@@ -68,7 +68,7 @@ namespace ConcertApp.MAUI.ViewModels
 
             if (isBooked)
             {
-                performance.Message = "This performance is already booked!";
+                
                 await Shell.Current.DisplayAlert("Error", "Booking already exists.", "OK");
                 return; 
             }
@@ -78,7 +78,7 @@ namespace ConcertApp.MAUI.ViewModels
                 if (success)
                 {
                     performance.IsBooked = true;
-                    performance.Message = "Booking created successfully!";
+                   
                     await Shell.Current.DisplayAlert("Success", "Booking created!", "OK");
                 }
                 else
