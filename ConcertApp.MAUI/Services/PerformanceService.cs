@@ -39,15 +39,8 @@ namespace ConcertApp.MAUI.Services
                     Console.WriteLine("Error: Response not successful.");
                     return false;
                 }
-
-                string content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Response content: {content}");  // Log the raw response content for debugging
+                string content = await response.Content.ReadAsStringAsync();     
                 var result = JsonSerializer.Deserialize<Dictionary<string, bool>>(content);
-
-                // Log the deserialized dictionary to confirm correct values
-                Console.WriteLine($"Deserialized result: {result}");
-
-                // Check if 'IsBooked' key exists and return its value
                 return result != null && result.ContainsKey("isBooked") && result["isBooked"];
             }
             catch (Exception ex)
@@ -64,7 +57,6 @@ namespace ConcertApp.MAUI.Services
                 int userId = Preferences.Get("UserID", 0);
                 string userName = Preferences.Get("UserName", string.Empty);
                 string userEmail = Preferences.Get("UserEmail", string.Empty);
-
                 if (userId == 0 || string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(userEmail))
                 {
                     throw new Exception("User data is missing. Please log in again.");

@@ -50,11 +50,11 @@ public class BookingController : ControllerBase
 
         if (existingBooking != null)
         {
-            // If booking exists, return a message without trying to create another
+            
             return Ok(new { IsBooked = true, Message = "Booking already exists." });
         }
 
-        var booking = _mapper.Map<Booking>(bookingDto); // Use AutoMapper
+        var booking = _mapper.Map<Booking>(bookingDto); 
 
         _unitOfWork.Bookings.Insert(booking);
         await _unitOfWork.Complete();
@@ -65,16 +65,16 @@ public class BookingController : ControllerBase
     [HttpDelete("delete/{bookingId}")]
     public async Task<IActionResult> DeleteBooking(int bookingId)
     {
-        var booking = await _unitOfWork.Bookings.Find(b => b.ID == bookingId); // Use bookingId to find the booking
+        var booking = await _unitOfWork.Bookings.Find(b => b.ID == bookingId); 
 
         if (booking == null)
         {
             return NotFound("Booking not found.");
         }
 
-        _unitOfWork.Bookings.Delete(booking.FirstOrDefault());  // Delete the found booking
+        _unitOfWork.Bookings.Delete(booking.FirstOrDefault());  
 
-        bool success = await _unitOfWork.Complete() > 0; // Ensure deletion was successful
+        bool success = await _unitOfWork.Complete() > 0; 
 
         if (!success)
         {
@@ -152,7 +152,7 @@ public class BookingController : ControllerBase
             {
                 return NotFound(ErrorCode2.BookingNotFound.ToString());
             }
-            //_todoRepository.Delete(id);
+           
             
             _unitOfWork.Bookings.Delete(id);
             int affectedItems = await _unitOfWork.Complete();
@@ -161,7 +161,7 @@ public class BookingController : ControllerBase
         {
             return BadRequest(ErrorCode2.CouldNotDeleteBooking.ToString());
         }
-        //return NoContent();
+      
         return Ok(_mapper.Map<BookingDto>(item));
     }
 
@@ -182,8 +182,7 @@ public class BookingController : ControllerBase
                 return NotFound(ErrorCode2.RecordNotFound.ToString());
             }
             item.Performance = existingItem.Performance;
-            //_todoRepository.Update(item);
-            //_unitOfWork.TodoItems.Update(item);
+          
             _unitOfWork.Bookings.Delete(existingItem);
             _unitOfWork.Bookings.Insert(item);
             int affectedItems = await _unitOfWork.Complete();
@@ -193,7 +192,7 @@ public class BookingController : ControllerBase
             return BadRequest(ErrorCode2.CouldNotUpdateItem.ToString());
         }
         
-//return NoContent();
+
 return Ok(_mapper.Map<BookingDto>(item));
     }
 }

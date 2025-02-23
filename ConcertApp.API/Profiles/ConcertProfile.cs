@@ -8,25 +8,21 @@ namespace ConcertApp.API.Profiles
     {
         public ConcertProfile()
         {
-            //Map Entity to DTO
-            // Note that "dest.Done" gets its value from "src.Completed"
-            // Note that there is no "dest.Comments" to match "src.Comments"
+       
             CreateMap<Concert, ConcertDto>()
             .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
 
-            //Map DTO to Entity
-            //Note that "dest.Completed" gets its value from "src.Done"
-            //Note that "dest.Comments" has its value set to string.Empty
+       
             CreateMap<ConcertDto, Concert>()
             .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
             
 
-            //CreateMap<Concert, ConcertDto>().ReverseMap();
+   
 
         }
     }

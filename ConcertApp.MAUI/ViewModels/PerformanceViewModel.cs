@@ -41,6 +41,7 @@ namespace ConcertApp.MAUI.ViewModels
             if (ConcertId == 0) return;
 
             var performances = await _performanceService.GetPerformancesByConcertIdAsync(ConcertId);
+            Performances.Clear();
             int userId = Preferences.Get("UserID", 0);  // Get the logged-in user ID
             foreach (var performance in performances)
             {
