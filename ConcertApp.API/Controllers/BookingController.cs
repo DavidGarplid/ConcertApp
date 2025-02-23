@@ -62,19 +62,19 @@ public class BookingController : ControllerBase
         return Ok("Booking created successfully.");
     }
 
-    [HttpDelete("delete")]
-    public async Task<IActionResult> DeleteBooking(int performanceId, int userId)
+    [HttpDelete("delete/{bookingId}")]
+    public async Task<IActionResult> DeleteBooking(int bookingId)
     {
-        var booking = await _unitOfWork.Bookings.Find(b => b.PerformanceID == performanceId && b.UserId == userId);
+        var booking = await _unitOfWork.Bookings.Find(b => b.ID == bookingId); // Use bookingId to find the booking
 
-        if (booking == null || !booking.Any()) // ✅ Ensure booking exists
+        if (booking == null)
         {
             return NotFound("Booking not found.");
         }
 
-        _unitOfWork.Bookings.Delete(booking.First()); // ✅ Delete only the first matching booking
+        _unitOfWork.Bookings.Delete(booking.FirstOrDefault());  // Delete the found booking
 
-        bool success = await _unitOfWork.Complete() > 0; // ✅ Ensure deletion was committed
+        bool success = await _unitOfWork.Complete() > 0; // Ensure deletion was successful
 
         if (!success)
         {

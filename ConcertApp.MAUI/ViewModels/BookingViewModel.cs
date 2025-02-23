@@ -63,24 +63,29 @@ namespace ConcertApp.MAUI.ViewModels
         {
             Debug.WriteLine($"DeleteBookingCommand triggered for Booking ID: {bookingId}");
 
+            // Confirm with the user before deleting
             bool isConfirmed = await Shell.Current.DisplayAlert("Confirm", "Are you sure you want to delete this booking?", "Yes", "No");
 
             if (!isConfirmed)
                 return;
 
+            // Call the service to delete the booking
             bool success = await _bookingService.DeleteBookingAsync(bookingId);
             if (success)
             {
+                // Find and remove the booking from the ObservableCollection
                 var bookingToRemove = Bookings.FirstOrDefault(b => b.ID == bookingId);
                 if (bookingToRemove != null)
                 {
                     Bookings.Remove(bookingToRemove);
                 }
 
+                // Inform the user about success
                 await Shell.Current.DisplayAlert("Success", "Booking deleted.", "OK");
             }
             else
             {
+                // If deletion failed, notify the user
                 await Shell.Current.DisplayAlert("Error", "Failed to delete booking.", "OK");
             }
         }
